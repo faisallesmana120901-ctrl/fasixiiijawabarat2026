@@ -867,8 +867,9 @@
   <script>
     // KONFIGURASI SUPABASE: isi setelah membuat project Supabase.
     // URL dan anon key memang boleh berada di frontend; keamanan ditentukan oleh RLS.
-    const SUPABASE_URL = "https://GANTI-PROJECT-ANDA.supabase.co";
-    const SUPABASE_ANON_KEY = "GANTI_DENGAN_SUPABASE_ANON_PUBLIC_KEY";
+    const SUPABASE_URL = "https://ztsbashhmrvvpfalprqo.supabase.co";
+
+const SUPABASE_ANON_KEY = "ISI_PUBLISHABLE_KEY_FASI2026";
     const SUPABASE_CONFIGURED = !SUPABASE_URL.includes("GANTI-PROJECT") && !SUPABASE_ANON_KEY.includes("GANTI_DENGAN");
     const supabaseClient = SUPABASE_CONFIGURED && window.supabase
       ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
