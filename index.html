@@ -1,0 +1,2508 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FASI XIII Tingkat Provinsi Jawa Barat • Kabupaten Sumedang 2026</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans & Amiri -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Amiri"', 'serif'],
+          },
+          colors: {
+            fasi: {
+              navy: '#0B2447',
+              royal: '#144272',
+              blue: '#1D63B8',
+              sky: '#E0F2FE',
+              gold: '#D99B26',
+              goldLight: '#F3C65F',
+              cream: '#F8FAFC'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Pola Geometris Islami Halus */
+    .islamic-pattern {
+      background-color: #0B2447;
+      background-image: radial-gradient(rgba(217, 155, 38, 0.14) 1px, transparent 1px),
+                        radial-gradient(rgba(255, 255, 255, 0.08) 1px, #0B2447 1px);
+      background-size: 32px 32px;
+      background-position: 0 0, 16px 16px;
+    }
+
+    /* Animasi Running Text */
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .animate-marquee {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marquee 28s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #94a3b8;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #144272;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-fasi-gold selection:text-white">
+
+  <!-- ==================== TOAST / NOTIFICATION BANNER ==================== -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-[100] flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ==================== RUNNING TEXT PENGUMUMAN ==================== -->
+  <div class="bg-fasi-gold text-fasi-navy font-semibold text-xs sm:text-sm py-2 px-4 overflow-hidden relative z-40 shadow-sm">
+    <div class="max-w-7xl mx-auto flex items-center gap-3">
+      <span class="bg-fasi-navy text-white px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider shrink-0 flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Info Penting
+      </span>
+      <div class="overflow-hidden w-full">
+        <div id="runningTextDisplay" class="animate-marquee font-semibold">
+          Selamat Datang Kafilah FASI XIII Tingkat Provinsi Jawa Barat di Kabupaten Sumedang (19 – 21 Desember 2026) • Jaga Sportivitas, Ukhuwah Islamiyah, dan Kebersihan di Seluruh Arena Lomba!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HEADER & NAVIGATION ==================== -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16 sm:h-20">
+        <!-- Brand & Logo -->
+        <a href="#beranda" onclick="switchTab('public')" class="flex items-center gap-3 group">
+          <div id="headerLogoWrapper" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-fasi-navy to-fasi-blue p-1 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform overflow-hidden border border-fasi-gold/40">
+            <!-- Logo akan dirender otomatis oleh JS (Custom Image atau SVG Emblem Resmi) -->
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-extrabold text-fasi-navy text-base sm:text-lg tracking-tight leading-none">FASI XIII</span>
+              <span class="bg-fasi-sky text-fasi-blue text-[10px] font-bold px-2 py-0.5 rounded-full border border-blue-200">JAWA BARAT</span>
+            </div>
+            <p class="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">Kabupaten Sumedang • 2026</p>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav id="desktopNav" class="hidden md:flex items-center gap-1 lg:gap-2">
+          <a href="#beranda" onclick="switchTab('public')" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-fasi-blue hover:bg-fasi-sky/60 transition">Beranda</a>
+          <a href="#portal-berita" onclick="switchTab('public')" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-fasi-blue hover:bg-fasi-sky/60 transition">Portal Berita</a>
+          <a href="#venue-lomba" onclick="switchTab('public')" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-fasi-blue hover:bg-fasi-sky/60 transition">Venue Lomba</a>
+          <a href="#wisata-sumedang" onclick="switchTab('public')" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-fasi-blue hover:bg-fasi-sky/60 transition">Wisata Sumedang</a>
+          <a href="#kuliner-sumedang" onclick="switchTab('public')" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-fasi-blue hover:bg-fasi-sky/60 transition">Kuliner Pusat Kota</a>
+        </nav>
+
+        <!-- Admin Button & Mobile Menu Toggle -->
+        <div class="flex items-center gap-2">
+          <button id="adminNavBtn" onclick="handleAdminNavClick()" class="inline-flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-fasi-navy text-white hover:bg-fasi-royal shadow-sm transition cursor-pointer">
+            <i class="fa-solid fa-shield-halved text-fasi-goldLight"></i>
+            <span id="adminNavBtnText">Admin Login</span>
+          </button>
+          <button onclick="toggleMobileMenu()" aria-label="Buka Menu" class="md:hidden p-2.5 rounded-xl text-slate-700 hover:bg-slate-100 transition">
+            <i class="fa-solid fa-bars text-lg"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-100 px-4 pt-2 pb-4 space-y-1 shadow-lg">
+      <a href="#beranda" onclick="switchTab('public'); toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-fasi-sky hover:text-fasi-blue">
+        <i class="fa-solid fa-house w-5 text-fasi-blue"></i> Beranda & Info Utama
+      </a>
+      <a href="#portal-berita" onclick="switchTab('public'); toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-fasi-sky hover:text-fasi-blue">
+        <i class="fa-solid fa-newspaper w-5 text-fasi-blue"></i> Portal Berita
+      </a>
+      <a href="#venue-lomba" onclick="switchTab('public'); toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-fasi-sky hover:text-fasi-blue">
+        <i class="fa-solid fa-mosque w-5 text-fasi-blue"></i> Venue Cabang Lomba
+      </a>
+      <a href="#wisata-sumedang" onclick="switchTab('public'); toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-fasi-sky hover:text-fasi-blue">
+        <i class="fa-solid fa-mountain-sun w-5 text-fasi-blue"></i> Rekomendasi Wisata
+      </a>
+      <a href="#kuliner-sumedang" onclick="switchTab('public'); toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-fasi-sky hover:text-fasi-blue">
+        <i class="fa-solid fa-utensils w-5 text-fasi-blue"></i> Kuliner Pusat Kota
+      </a>
+    </div>
+  </header>
+
+  <!-- ==================== PUBLIC PORTAL VIEW ==================== -->
+  <main id="publicPortalView">
+    
+    <!-- HERO SECTION -->
+    <section id="beranda" class="islamic-pattern text-white relative overflow-hidden pt-10 pb-16 sm:pt-14 sm:pb-24">
+      <!-- Dekorasi Cahaya -->
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-fasi-blue/30 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-fasi-gold/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Kolom Kiri: Teks & Countdown -->
+          <div class="lg:col-span-7 text-center lg:text-left space-y-5">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-fasi-gold/50 text-fasi-goldLight text-xs sm:text-sm font-bold backdrop-blur-sm">
+              <i class="fa-solid fa-star text-xs"></i>
+              <span>LPPTKA - BKPRMI PROVINSI JAWA BARAT</span>
+            </div>
+
+            <h1 id="heroTitleDisplay" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+              FASI XIII TINGKAT PROVINSI JAWA BARAT
+            </h1>
+
+            <p id="heroSubtitleDisplay" class="text-lg sm:text-xl font-bold text-fasi-goldLight flex items-center justify-center lg:justify-start gap-2">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Kabupaten Sumedang • 19 – 21 Desember 2026</span>
+            </p>
+
+            <p id="heroDescDisplay" class="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              Portal informasi resmi Festival Anak Shaleh Indonesia ke-13 (FASI XIII) Tingkat Provinsi Jawa Barat. Temukan lokasi venue perlombaan, panduan destinasi wisata unggulan, serta kuliner legendaris di pusat kota Kabupaten Sumedang.
+            </p>
+
+            <!-- Countdown Timer -->
+            <div class="pt-2">
+              <p class="text-xs uppercase tracking-widest text-blue-200 font-semibold mb-3">Hitung Mundur Pelaksanaan (19 Desember 2026)</p>
+              <div class="grid grid-cols-4 gap-2.5 sm:gap-4 max-w-md mx-auto lg:mx-0">
+                <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-3 text-center">
+                  <div id="cdDays" class="text-2xl sm:text-3xl font-extrabold text-white">00</div>
+                  <div class="text-[11px] text-blue-200 font-medium uppercase mt-0.5">Hari</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-3 text-center">
+                  <div id="cdHours" class="text-2xl sm:text-3xl font-extrabold text-fasi-goldLight">00</div>
+                  <div class="text-[11px] text-blue-200 font-medium uppercase mt-0.5">Jam</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-3 text-center">
+                  <div id="cdMinutes" class="text-2xl sm:text-3xl font-extrabold text-white">00</div>
+                  <div class="text-[11px] text-blue-200 font-medium uppercase mt-0.5">Menit</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-3 text-center">
+                  <div id="cdSeconds" class="text-2xl sm:text-3xl font-extrabold text-fasi-goldLight">00</div>
+                  <div class="text-[11px] text-blue-200 font-medium uppercase mt-0.5">Detik</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-3">
+              <a href="#venue-lomba" class="px-6 py-3.5 rounded-2xl bg-fasi-gold hover:bg-amber-500 text-fasi-navy font-extrabold text-sm shadow-lg shadow-amber-900/20 transition flex items-center gap-2">
+                <i class="fa-solid fa-map-location-dot"></i> Cek Venue & Jadwal Lomba
+              </a>
+              <a href="#kuliner-sumedang" class="px-6 py-3.5 rounded-2xl bg-white/15 hover:bg-white/25 text-white border border-white/25 font-bold text-sm backdrop-blur-sm transition flex items-center gap-2">
+                <i class="fa-solid fa-bowl-food"></i> Kuliner & Wisata Sumedang
+              </a>
+            </div>
+          </div>
+
+          <!-- Kolom Kanan: Emblem Resmi FASI XIII Sumedang -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative w-full max-w-sm">
+              <div class="absolute inset-0 bg-gradient-to-tr from-fasi-gold/30 to-sky-400/30 rounded-3xl blur-2xl transform rotate-3"></div>
+              <div class="relative bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border-4 border-fasi-gold/60 text-center">
+                <div id="heroLogoContainer" class="w-full flex items-center justify-center">
+                  <!-- Logo Resmi dirender lewat JavaScript -->
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100">
+                  <span class="inline-block px-3 py-1 rounded-full bg-fasi-navy text-fasi-goldLight text-xs font-extrabold tracking-wide">
+                    SUMEDANG INSUN MEDAL
+                  </span>
+                  <p class="text-xs text-slate-500 mt-1.5 font-medium">Tuan Rumah FASI XIII Provinsi Jawa Barat</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK STATS BAR -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5">
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-md border border-slate-100 flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-xl bg-blue-50 text-fasi-blue flex items-center justify-center text-xl shrink-0">
+            <i class="fa-solid fa-trophy"></i>
+          </div>
+          <div>
+            <div id="statVenues" class="text-xl sm:text-2xl font-extrabold text-fasi-navy">0</div>
+            <div class="text-xs text-slate-500 font-semibold">Cabang & Venue Lomba</div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-md border border-slate-100 flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-xl bg-amber-50 text-fasi-gold flex items-center justify-center text-xl shrink-0">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div>
+            <div class="text-xl sm:text-2xl font-extrabold text-fasi-navy">27</div>
+            <div class="text-xs text-slate-500 font-semibold">Kafilah Kab/Kota Jabar</div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-md border border-slate-100 flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl shrink-0">
+            <i class="fa-solid fa-tree-city"></i>
+          </div>
+          <div>
+            <div id="statWisata" class="text-xl sm:text-2xl font-extrabold text-fasi-navy">0</div>
+            <div class="text-xs text-slate-500 font-semibold">Destinasi Wisata</div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-md border border-slate-100 flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl shrink-0">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <div>
+            <div id="statKuliner" class="text-xl sm:text-2xl font-extrabold text-fasi-navy">0</div>
+            <div class="text-xs text-slate-500 font-semibold">Kuliner Pusat Kota</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 0: PORTAL BERITA FASI XIII ==================== -->
+    <section id="portal-berita" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-fasi-blue bg-fasi-sky px-3 py-1 rounded-full mb-2">
+            <i class="fa-solid fa-newspaper"></i> Kabar & Informasi Resmi
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-fasi-navy">Portal Berita FASI XIII Sumedang</h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-1">Ikuti pengumuman resmi panitia, kesiapan arena lomba, agenda kafilah se-Jawa Barat, dan kabar Sumedang terkini.</p>
+        </div>
+
+        <div class="relative w-full lg:w-80">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+          <input type="text" id="searchBeritaInput" oninput="renderBerita()" placeholder="Cari judul, isi berita, penulis, atau tag..." class="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-fasi-blue" />
+        </div>
+      </div>
+
+      <!-- Filter Kategori Berita -->
+      <div class="flex flex-wrap gap-2 mb-8" id="beritaFilterButtons">
+        <button onclick="setBeritaFilter('ALL')" data-filter="ALL" class="berita-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-fasi-navy text-white shadow-sm transition cursor-pointer">Semua Berita</button>
+        <button onclick="setBeritaFilter('Pengumuman Resmi')" data-filter="Pengumuman Resmi" class="berita-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition cursor-pointer">Pengumuman Resmi</button>
+        <button onclick="setBeritaFilter('Persiapan & Venue')" data-filter="Persiapan & Venue" class="berita-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition cursor-pointer">Persiapan & Venue</button>
+        <button onclick="setBeritaFilter('Kafilah & Prestasi')" data-filter="Kafilah & Prestasi" class="berita-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition cursor-pointer">Kafilah & Prestasi</button>
+        <button onclick="setBeritaFilter('Budaya & Kuliner')" data-filter="Budaya & Kuliner" class="berita-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition cursor-pointer">Budaya & Kuliner</button>
+      </div>
+
+      <!-- Berita Utama / Highlight Banner -->
+      <div id="featuredBeritaBanner" class="mb-8"></div>
+
+      <!-- Grid Kartu Berita -->
+      <div id="beritaGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dirender melalui JS -->
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 1: VENUE PER CABANG LOMBA ==================== -->
+    <section id="venue-lomba" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-fasi-blue bg-fasi-sky px-3 py-1 rounded-full mb-2">
+            <i class="fa-solid fa-mosque"></i> Arena Perlombaan
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-fasi-navy">Venue Per Cabang Lomba</h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-1">Daftar lokasi gedung/masjid pelaksanaan lomba FASI XIII di Kabupaten Sumedang beserta titik Google Maps.</p>
+        </div>
+
+        <!-- Search & Filter Bar -->
+        <div class="flex flex-col sm:flex-row gap-2.5 w-full md:w-auto">
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+            <input type="text" id="searchVenueInput" oninput="renderVenues()" placeholder="Cari lomba atau gedung..." class="w-full sm:w-64 pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-fasi-blue" />
+          </div>
+          <select id="filterVenueCategory" onchange="renderVenues()" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-fasi-blue">
+            <option value="ALL">Semua Jenjang (TKA/TPA/TQA)</option>
+            <option value="TKA">Jenjang TKA</option>
+            <option value="TPA">Jenjang TPA</option>
+            <option value="TQA">Jenjang TQA</option>
+            <option value="UMUM">Semua Jenjang / Umum</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Grid Kartu Venue -->
+      <div id="venuesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dirender melalui JS -->
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 2: REKOMENDASI WISATA SUMEDANG ==================== -->
+    <section id="wisata-sumedang" class="py-16 sm:py-20 bg-gradient-to-b from-slate-100/80 to-white border-y border-slate-200/70">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+          <div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full mb-2">
+              <i class="fa-solid fa-compass"></i> Jelajah Sumedang
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-fasi-navy">Rekomendasi Tempat Wisata Sumedang</h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-1">Destinasi wisata religi, sejarah, dan alam ramah keluarga untuk kafilah & pendamping selama di Sumedang.</p>
+          </div>
+
+          <!-- Filter Kategori Wisata -->
+          <div class="flex flex-wrap gap-2" id="wisataFilterButtons">
+            <button onclick="setWisataFilter('ALL')" data-filter="ALL" class="wisata-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-fasi-navy text-white shadow-sm transition">Semua</button>
+            <button onclick="setWisataFilter('Religi')" data-filter="Religi" class="wisata-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition">Religi</button>
+            <button onclick="setWisataFilter('Sejarah')" data-filter="Sejarah" class="wisata-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition">Sejarah</button>
+            <button onclick="setWisataFilter('Alam & Keluarga')" data-filter="Alam & Keluarga" class="wisata-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition">Alam & Keluarga</button>
+          </div>
+        </div>
+
+        <div id="wisataGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Dirender melalui JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 3: REKOMENDASI KULINER PUSAT KOTA ==================== -->
+    <section id="kuliner-sumedang" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-amber-800 bg-amber-100 px-3 py-1 rounded-full mb-2">
+            <i class="fa-solid fa-utensils"></i> Kuliner & Oleh-Oleh
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-fasi-navy">Rekomendasi Tempat Makan Pusat Kota</h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-1">Pilihan rumah makan khas Sunda, kuliner legendaris, dan pusat oleh-oleh Tahu Sumedang di sekitar Pusat Kota.</p>
+        </div>
+
+        <div class="relative w-full md:w-72">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+          <input type="text" id="searchKulinerInput" oninput="renderKuliner()" placeholder="Cari tahu, sate, rumah makan..." class="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-fasi-gold" />
+        </div>
+      </div>
+
+      <div id="kulinerGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Dirender melalui JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== ADMIN DASHBOARD VIEW (HIDDEN BY DEFAULT) ==================== -->
+  <section id="adminDashboardView" class="hidden min-h-screen bg-slate-100 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Admin Top Bar -->
+      <div class="bg-fasi-navy text-white rounded-3xl p-6 sm:p-8 shadow-lg mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold mb-2">
+            <i class="fa-solid fa-circle-check"></i> Mode Administrator Aktif
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold">Panel Kontrol Konten FASI XIII</h1>
+          <p class="text-blue-200 text-sm mt-1">Kelola konten FASI XIII. Perubahan tersimpan ke database cloud saat Supabase sudah dikonfigurasi.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2.5">
+          <button onclick="switchTab('public')" class="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs sm:text-sm font-bold transition flex items-center gap-2">
+            <i class="fa-solid fa-eye"></i> Lihat Portal Publik
+          </button>
+          <button onclick="logoutAdmin()" class="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs sm:text-sm font-bold transition flex items-center gap-2">
+            <i class="fa-solid fa-right-from-bracket"></i> Keluar (Logout)
+          </button>
+        </div>
+      </div>
+
+      <!-- Admin Navigation Tabs -->
+      <div class="flex overflow-x-auto gap-2 pb-2 mb-6 no-scrollbar">
+        <button onclick="switchAdminSubTab('berita')" id="subtab-btn-berita" class="admin-subtab-btn px-4 py-3 rounded-xl text-xs sm:text-sm font-bold bg-fasi-blue text-white shadow-sm whitespace-nowrap flex items-center gap-2">
+          <i class="fa-solid fa-newspaper"></i> Kelola Portal Berita
+        </button>
+        <button onclick="switchAdminSubTab('venues')" id="subtab-btn-venues" class="admin-subtab-btn px-4 py-3 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 whitespace-nowrap flex items-center gap-2">
+          <i class="fa-solid fa-mosque"></i> Kelola Venue Lomba
+        </button>
+        <button onclick="switchAdminSubTab('wisata')" id="subtab-btn-wisata" class="admin-subtab-btn px-4 py-3 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 whitespace-nowrap flex items-center gap-2">
+          <i class="fa-solid fa-mountain-sun"></i> Kelola Tempat Wisata
+        </button>
+        <button onclick="switchAdminSubTab('kuliner')" id="subtab-btn-kuliner" class="admin-subtab-btn px-4 py-3 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 whitespace-nowrap flex items-center gap-2">
+          <i class="fa-solid fa-utensils"></i> Kelola Tempat Makan
+        </button>
+        <button onclick="switchAdminSubTab('settings')" id="subtab-btn-settings" class="admin-subtab-btn px-4 py-3 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 whitespace-nowrap flex items-center gap-2">
+          <i class="fa-solid fa-gear"></i> Pengaturan Web, Logo & Akun
+        </button>
+      </div>
+
+      <!-- SUB-TAB 0: KELOLA PORTAL BERITA -->
+      <div id="admin-subtab-berita" class="admin-subtab-content bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-xl font-extrabold text-fasi-navy">Manajemen Portal Berita FASI XIII</h2>
+            <p class="text-xs sm:text-sm text-slate-500">Buat, sunting, publikasikan artikel berita, atur berita utama, dan sinkronkan ke running text.</p>
+          </div>
+          <button onclick="openCrudModal('berita')" class="px-4 py-2.5 rounded-xl bg-fasi-blue hover:bg-fasi-royal text-white text-sm font-bold flex items-center gap-2 self-start cursor-pointer">
+            <i class="fa-solid fa-plus"></i> Tulis Berita Baru
+          </button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 text-xs uppercase text-slate-500 bg-slate-50">
+                <th class="py-3 px-4 rounded-tl-xl">Judul Berita</th>
+                <th class="py-3 px-4">Kategori</th>
+                <th class="py-3 px-4">Tanggal & Penulis</th>
+                <th class="py-3 px-4">Status & Sorotan</th>
+                <th class="py-3 px-4 text-right rounded-tr-xl">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="adminBeritaTable" class="divide-y divide-slate-100 text-sm"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 1: KELOLA VENUE LOMBA -->
+      <div id="admin-subtab-venues" class="admin-subtab-content hidden bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-xl font-extrabold text-fasi-navy">Daftar Venue Cabang Lomba</h2>
+            <p class="text-xs sm:text-sm text-slate-500">Kelola cabang lomba, jenjang, jadwal, gedung, serta titik pencarian Google Maps.</p>
+          </div>
+          <button onclick="openCrudModal('venue')" class="px-4 py-2.5 rounded-xl bg-fasi-blue hover:bg-fasi-royal text-white text-sm font-bold flex items-center gap-2 self-start cursor-pointer">
+            <i class="fa-solid fa-plus"></i> Tambah Venue Lomba
+          </button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 text-xs uppercase text-slate-500 bg-slate-50">
+                <th class="py-3 px-4 rounded-tl-xl">Cabang Lomba</th>
+                <th class="py-3 px-4">Jenjang</th>
+                <th class="py-3 px-4">Lokasi / Venue</th>
+                <th class="py-3 px-4">Jadwal</th>
+                <th class="py-3 px-4 text-right rounded-tr-xl">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="adminVenuesTable" class="divide-y divide-slate-100 text-sm"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 2: KELOLA TEMPAT WISATA -->
+      <div id="admin-subtab-wisata" class="admin-subtab-content hidden bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-xl font-extrabold text-fasi-navy">Daftar Destinasi Wisata Sumedang</h2>
+            <p class="text-xs sm:text-sm text-slate-500">Kelola informasi destinasi wisata di Kabupaten Sumedang beserta titik maps.</p>
+          </div>
+          <button onclick="openCrudModal('wisata')" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold flex items-center gap-2 self-start cursor-pointer">
+            <i class="fa-solid fa-plus"></i> Tambah Tempat Wisata
+          </button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 text-xs uppercase text-slate-500 bg-slate-50">
+                <th class="py-3 px-4 rounded-tl-xl">Nama Destinasi</th>
+                <th class="py-3 px-4">Kategori</th>
+                <th class="py-3 px-4">Alamat / Kecamatan</th>
+                <th class="py-3 px-4">Jam Buka</th>
+                <th class="py-3 px-4 text-right rounded-tr-xl">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="adminWisataTable" class="divide-y divide-slate-100 text-sm"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 3: KELOLA KULINER -->
+      <div id="admin-subtab-kuliner" class="admin-subtab-content hidden bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-xl font-extrabold text-fasi-navy">Daftar Tempat Makan & Kuliner Pusat Kota</h2>
+            <p class="text-xs sm:text-sm text-slate-500">Kelola rekomendasi tempat makan populer di sekitar Pusat Kota Sumedang.</p>
+          </div>
+          <button onclick="openCrudModal('kuliner')" class="px-4 py-2.5 rounded-xl bg-fasi-gold hover:bg-amber-500 text-fasi-navy text-sm font-bold flex items-center gap-2 self-start">
+            <i class="fa-solid fa-plus"></i> Tambah Tempat Makan
+          </button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 text-xs uppercase text-slate-500 bg-slate-50">
+                <th class="py-3 px-4 rounded-tl-xl">Nama Tempat Makan</th>
+                <th class="py-3 px-4">Menu Andalan</th>
+                <th class="py-3 px-4">Area / Lokasi</th>
+                <th class="py-3 px-4">Kisaran Harga</th>
+                <th class="py-3 px-4 text-right rounded-tr-xl">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="adminKulinerTable" class="divide-y divide-slate-100 text-sm"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 4: PENGATURAN UMUM, LOGO & AKUN ADMIN -->
+      <div id="admin-subtab-settings" class="admin-subtab-content hidden space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Form Identitas & Logo Kegiatan -->
+          <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-4">
+            <h3 class="text-lg font-extrabold text-fasi-navy flex items-center gap-2">
+              <i class="fa-solid fa-image text-fasi-blue"></i> Identitas Portal & Logo Kegiatan
+            </h3>
+            <p class="text-xs text-slate-500">Unggah file gambar logo resmi (JPG/PNG) seperti <b>FASI ke XIII - Logo.jpg</b> agar langsung tampil di seluruh halaman web.</p>
+
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+              <div id="adminLogoPreview" class="w-20 h-20 rounded-2xl bg-white border border-slate-200 p-1.5 flex items-center justify-center shrink-0 overflow-hidden"></div>
+              <div class="space-y-2">
+                <label class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-fasi-blue hover:bg-fasi-royal text-white text-xs font-bold cursor-pointer transition">
+                  <i class="fa-solid fa-upload"></i> Upload Gambar Logo Baru
+                  <input type="file" id="logoFileInput" accept="image/*" onchange="handleLogoUpload(event)" class="hidden" />
+                </label>
+                <button type="button" onclick="resetLogoToDefault()" class="block text-xs text-rose-600 hover:underline font-semibold">
+                  Kembalikan ke Emblem Bawaan
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Judul Utama Kegiatan</label>
+              <input type="text" id="setHeroTitle" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Subjudul Lokasi & Tanggal</label>
+              <input type="text" id="setHeroSubtitle" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Deskripsi Singkat Beranda</label>
+              <textarea id="setHeroDesc" rows="3" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Teks Pengumuman Berjalan (Running Text)</label>
+              <input type="text" id="setRunningText" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+            </div>
+
+            <button onclick="saveGeneralSettings()" class="w-full py-3 rounded-xl bg-fasi-navy hover:bg-fasi-royal text-white font-bold text-sm transition">
+              <i class="fa-solid fa-floppy-disk mr-1"></i> Simpan Perubahan Tampilan
+            </button>
+          </div>
+
+          <!-- Form Keamanan Akun Admin & Backup Data -->
+          <div class="space-y-6">
+            <div class="hidden bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-4">
+              <h3 class="text-lg font-extrabold text-fasi-navy flex items-center gap-2">
+                <i class="fa-solid fa-user-lock text-fasi-gold"></i> Ubah Akun Login Khusus Admin
+              </h3>
+              <p class="text-xs text-slate-500">Ubah Username dan Password agar hanya Anda yang memiliki akses masuk ke panel admin ini.</p>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Username Admin Baru</label>
+                <input type="text" id="setAdminUser" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Password Admin Baru</label>
+                <input type="password" id="setAdminPass" placeholder="Masukkan password baru..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Konfirmasi Password Baru</label>
+                <input type="password" id="setAdminPassConfirm" placeholder="Ulangi password baru..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+              </div>
+
+              <button onclick="saveAdminCredentials()" class="w-full py-3 rounded-xl bg-fasi-gold hover:bg-amber-500 text-fasi-navy font-extrabold text-sm transition">
+                <i class="fa-solid fa-key mr-1"></i> Perbarui Username & Password
+              </button>
+            </div>
+
+            <!-- Backup & Reset Database -->
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-4">
+              <h3 class="text-lg font-extrabold text-fasi-navy flex items-center gap-2">
+                <i class="fa-solid fa-database text-emerald-600"></i> Cadangkan & Pulihkan Data
+              </h3>
+              <p class="text-xs text-slate-500">Ekspor seluruh data ke file JSON untuk cadangan atau pemindahan ke perangkat lain.</p>
+              <div class="flex flex-wrap gap-2.5">
+                <button onclick="exportDataJSON()" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-2">
+                  <i class="fa-solid fa-download"></i> Download Backup (JSON)
+                </button>
+                <label class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold flex items-center gap-2 cursor-pointer">
+                  <i class="fa-solid fa-file-import"></i> Restore dari JSON
+                  <input type="file" accept=".json" onchange="importDataJSON(event)" class="hidden" />
+                </label>
+                <button onclick="resetAllDataToDefault()" class="px-4 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold flex items-center gap-2">
+                  <i class="fa-solid fa-rotate-left"></i> Reset Data Awal
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-fasi-navy text-slate-300 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-xl bg-white p-1 flex items-center justify-center" id="footerLogoWrapper"></div>
+            <div>
+              <h4 class="text-white font-extrabold text-base">FASI XIII JAWA BARAT</h4>
+              <p class="text-xs text-fasi-goldLight font-semibold">Kabupaten Sumedang • 19–21 Desember 2026</p>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Festival Anak Shaleh Indonesia ke-13 Tingkat Provinsi Jawa Barat. Mewujudkan Generasi Qur'ani yang Cerdas, Berakhlakul Karimah, dan Cinta Tanah Air.
+          </p>
+        </div>
+
+        <div class="text-xs space-y-2">
+          <h5 class="text-white font-bold uppercase tracking-wider mb-2">Navigasi Cepat</h5>
+          <ul class="space-y-1.5">
+            <li><a href="#portal-berita" onclick="switchTab('public')" class="hover:text-fasi-goldLight transition">• Portal Berita Resmi</a></li>
+            <li><a href="#venue-lomba" onclick="switchTab('public')" class="hover:text-fasi-goldLight transition">• Daftar Venue Cabang Lomba</a></li>
+            <li><a href="#wisata-sumedang" onclick="switchTab('public')" class="hover:text-fasi-goldLight transition">• Rekomendasi Wisata Sumedang</a></li>
+            <li><a href="#kuliner-sumedang" onclick="switchTab('public')" class="hover:text-fasi-goldLight transition">• Rekomendasi Kuliner Pusat Kota</a></li>
+          </ul>
+        </div>
+
+        <div class="text-xs space-y-2 md:text-right">
+          <h5 class="text-white font-bold uppercase tracking-wider mb-2">Sekretariat Panitia Lokal</h5>
+          <p class="text-slate-400">Komplek Islamic Center / Masjid Agung Sumedang</p>
+          <p class="text-slate-400">Kabupaten Sumedang, Jawa Barat 45311</p>
+          <div class="pt-2">
+            <button onclick="handleAdminNavClick()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold transition">
+              <i class="fa-solid fa-lock text-fasi-goldLight"></i> Akses Pengelola / Admin
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10 mt-8 pt-6 text-center text-xs text-slate-400">
+        &copy; 2026 Panitia FASI XIII Tingkat Provinsi Jawa Barat – Kabupaten Sumedang. Hak Cipta Dilindungi.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL 1: INTERACTIVE GOOGLE MAPS PREVIEW ==================== -->
+  <div id="mapsModal" class="fixed inset-0 z-50 hidden bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-slate-200">
+      <div class="bg-fasi-navy text-white px-6 py-4 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <span id="mapsModalBadge" class="text-[11px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-fasi-gold text-fasi-navy shrink-0">Lokasi</span>
+          <h3 id="mapsModalTitle" class="text-base sm:text-lg font-extrabold truncate">Peta Lokasi</h3>
+        </div>
+        <button onclick="closeMapsModal()" class="w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition shrink-0 cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-5 sm:p-6 space-y-4">
+        <p id="mapsModalAddress" class="text-xs sm:text-sm text-slate-600 flex items-start gap-2">
+          <i class="fa-solid fa-location-dot text-rose-500 mt-0.5 shrink-0"></i>
+          <span></span>
+        </p>
+        <div class="w-full h-72 sm:h-80 rounded-2xl overflow-hidden border border-slate-200 bg-slate-100">
+          <iframe id="mapsIframe" src="" class="w-full h-full border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="flex flex-wrap justify-end gap-2.5 pt-1">
+          <button onclick="closeMapsModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-bold cursor-pointer">Tutup</button>
+          <a id="mapsExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-fasi-blue hover:bg-fasi-royal text-white text-xs sm:text-sm font-bold inline-flex items-center gap-2">
+            <i class="fa-solid fa-diamond-turn-right"></i> Buka Navigasi Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 1B: FULL ARTICLE READER MODAL ==================== -->
+  <div id="beritaReaderModal" class="fixed inset-0 z-50 hidden bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl border border-slate-200 my-8">
+      <div class="bg-fasi-navy text-white px-6 py-4 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <span id="readerCategoryBadge" class="text-[11px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-fasi-gold text-fasi-navy">Kategori</span>
+          <span id="readerReadTime" class="text-xs text-blue-200 font-medium">3 menit baca</span>
+        </div>
+        <button onclick="closeBeritaReaderModal()" class="w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition shrink-0 cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="max-h-[78vh] overflow-y-auto">
+        <div id="readerCoverContainer" class="w-full h-56 sm:h-72 bg-slate-100 overflow-hidden"></div>
+
+        <article class="p-6 sm:p-8 space-y-5">
+          <div>
+            <h2 id="readerTitle" class="text-2xl sm:text-3xl font-extrabold text-fasi-navy leading-tight"></h2>
+            <div class="flex flex-wrap items-center gap-4 text-xs text-slate-500 font-semibold mt-3 pt-3 border-t border-slate-100">
+              <span class="flex items-center gap-1.5"><i class="fa-regular fa-user text-fasi-blue"></i> <span id="readerAuthor"></span></span>
+              <span class="flex items-center gap-1.5"><i class="fa-regular fa-calendar text-fasi-gold"></i> <span id="readerDate"></span></span>
+              <button onclick="copyCurrentBeritaLink()" class="ml-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-fasi-sky hover:bg-blue-100 text-fasi-blue font-bold transition cursor-pointer">
+                <i class="fa-solid fa-share-nodes"></i> Salin Ringkasan Berita
+              </button>
+            </div>
+          </div>
+
+          <p id="readerExcerpt" class="text-sm sm:text-base font-bold text-slate-700 bg-slate-50 p-4 rounded-2xl border-l-4 border-fasi-gold leading-relaxed"></p>
+
+          <div id="readerBody" class="space-y-4 text-sm sm:text-base text-slate-700 leading-relaxed"></div>
+
+          <div id="readerTagsContainer" class="pt-4 border-t border-slate-100 flex flex-wrap gap-2"></div>
+
+          <!-- Berita Terkait / Berikutnya -->
+          <div class="pt-6 border-t border-slate-200">
+            <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-3">Berita Lainnya Seputar FASI XIII</h4>
+            <div id="readerRelatedList" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 2: ADMIN LOGIN ==================== -->
+  <div id="adminLoginModal" class="fixed inset-0 z-50 hidden bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-slate-200">
+      <div class="islamic-pattern text-white p-6 text-center relative">
+        <button onclick="closeLoginModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="w-14 h-14 rounded-2xl bg-white/15 border border-fasi-gold/50 mx-auto flex items-center justify-center text-2xl text-fasi-goldLight mb-3">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h3 class="text-xl font-extrabold">Login Khusus Admin</h3>
+        <p class="text-xs text-blue-200 mt-1">Masuk untuk mengatur seluruh konten FASI XIII Sumedang</p>
+      </div>
+
+      <form onsubmit="submitAdminLogin(event)" class="p-6 space-y-4">
+        <div id="loginErrorAlert" class="hidden p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold">
+          Username atau Password salah! Silakan periksa kembali.
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Email Admin</label>
+          <div class="relative">
+            <i class="fa-solid fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+            <input type="text" id="loginUsernameInput" required placeholder="Email admin yang terdaftar di Supabase" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-fasi-blue" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Password</label>
+          <div class="relative">
+            <i class="fa-solid fa-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+            <input type="password" id="loginPasswordInput" required placeholder="Masukkan password" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-fasi-blue" />
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-blue-50 border border-blue-200 text-[11px] text-blue-900">
+          Akun admin dibuat dan dikelola melalui Supabase Authentication. Tidak ada password bawaan di dalam file HTML.
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-fasi-navy hover:bg-fasi-royal text-white font-extrabold text-sm shadow-md transition">
+          Masuk ke Dashboard Admin
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 3: CRUD FORM (TAMBAH / EDIT DATA) ==================== -->
+  <div id="crudModal" class="fixed inset-0 z-50 hidden bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl border border-slate-200 my-8">
+      <div class="bg-fasi-navy text-white px-6 py-4 flex items-center justify-between">
+        <h3 id="crudModalTitle" class="text-lg font-extrabold">Tambah Data</h3>
+        <button onclick="closeCrudModal()" class="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="crudForm" onsubmit="submitCrudForm(event)" class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
+        <input type="hidden" id="crudType" />
+        <input type="hidden" id="crudId" />
+
+        <div id="crudFieldsContainer" class="space-y-4">
+          <!-- Field dinamis berdasarkan tipe (venue / wisata / kuliner) -->
+        </div>
+
+        <div class="pt-3 border-t border-slate-100 flex justify-end gap-2.5">
+          <button type="button" onclick="closeCrudModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-bold">Batal</button>
+          <button type="submit" class="px-5 py-2.5 rounded-xl bg-fasi-blue hover:bg-fasi-royal text-white text-sm font-bold shadow-sm">
+            <i class="fa-solid fa-check mr-1"></i> Simpan Data
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 4: KONFIRMASI HAPUS / RESET ==================== -->
+  <div id="confirmModal" class="fixed inset-0 z-50 hidden bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 text-center space-y-4">
+      <div class="w-14 h-14 rounded-full bg-rose-100 text-rose-600 mx-auto flex items-center justify-center text-2xl">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <h4 id="confirmModalTitle" class="text-lg font-extrabold text-slate-800">Konfirmasi Tindakan</h4>
+      <p id="confirmModalMessage" class="text-xs sm:text-sm text-slate-600">Apakah Anda yakin ingin menghapus data ini?</p>
+      <div class="flex gap-2.5 pt-2">
+        <button onclick="closeConfirmModal()" class="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-bold">Batal</button>
+        <button id="confirmModalActionBtn" class="flex-1 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-sm font-bold">Ya, Lanjutkan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT APPLICATION LOGIC ==================== -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // KONFIGURASI SUPABASE: isi setelah membuat project Supabase.
+    // URL dan anon key memang boleh berada di frontend; keamanan ditentukan oleh RLS.
+    const SUPABASE_URL = "https://GANTI-PROJECT-ANDA.supabase.co";
+    const SUPABASE_ANON_KEY = "GANTI_DENGAN_SUPABASE_ANON_PUBLIC_KEY";
+    const SUPABASE_CONFIGURED = !SUPABASE_URL.includes("GANTI-PROJECT") && !SUPABASE_ANON_KEY.includes("GANTI_DENGAN");
+    const supabaseClient = SUPABASE_CONFIGURED && window.supabase
+      ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+      : null;
+    let currentAdminSession = null;
+
+    // 1. DEFAULT OFFICIAL SVG EMBLEM (Menyerupai Logo FASI XIII Jawa Barat di Sumedang: Gedung Sate, Masjid Al-Kamil Jatigede, Santri Putra & Putri, Teks Resmi)
+    const DEFAULT_OFFICIAL_LOGO_SVG = `
+      <svg viewBox="0 0 420 420" class="w-full h-auto max-h-72 mx-auto select-none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#E0F2FE"/>
+            <stop offset="100%" stop-color="#BAE6FD"/>
+          </linearGradient>
+          <linearGradient id="navyGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0B2447"/>
+            <stop offset="100%" stop-color="#1D63B8"/>
+          </linearGradient>
+          <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#D99B26"/>
+            <stop offset="50%" stop-color="#F3C65F"/>
+            <stop offset="100%" stop-color="#D99B26"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Kubah Bingkai Islami -->
+        <path d="M210 18 C255 62, 345 78, 365 175 C380 250, 330 300, 210 315 C90 300, 40 250, 55 175 C75 78, 165 62, 210 18 Z" fill="url(#skyGrad)" stroke="url(#navyGrad)" stroke-width="10"/>
+        <path d="M210 30 C250 70, 332 85, 350 172 C363 238, 318 286, 210 300 C102 286, 57 238, 70 172 C88 85, 170 70, 210 30 Z" fill="none" stroke="url(#goldGrad)" stroke-width="5"/>
+
+        <!-- Siluet Gedung Sate (Ikon Jawa Barat) -->
+        <g transform="translate(132, 72)">
+          <rect x="64" y="14" width="28" height="16" rx="2" fill="#144272"/>
+          <rect x="52" y="30" width="52" height="14" rx="2" fill="#1D63B8"/>
+          <rect x="40" y="44" width="76" height="45" rx="3" fill="#FFFFFF" stroke="#144272" stroke-width="3"/>
+          <rect x="10" y="58" width="30" height="31" rx="2" fill="#FFFFFF" stroke="#144272" stroke-width="2.5"/>
+          <rect x="116" y="58" width="30" height="31" rx="2" fill="#FFFFFF" stroke="#144272" stroke-width="2.5"/>
+          <!-- Tusuk Sate -->
+          <line x1="78" y1="0" x2="78" y2="14" stroke="#0B2447" stroke-width="3"/>
+          <circle cx="78" cy="4" r="2.5" fill="#D99B26"/>
+          <circle cx="78" cy="9" r="2.5" fill="#D99B26"/>
+          <!-- Jendela Gedung Sate -->
+          <rect x="50" y="54" width="8" height="14" rx="4" fill="#144272"/>
+          <rect x="64" y="54" width="8" height="14" rx="4" fill="#144272"/>
+          <rect x="78" y="54" width="8" height="14" rx="4" fill="#144272"/>
+          <rect x="92" y="54" width="8" height="14" rx="4" fill="#144272"/>
+        </g>
+
+        <!-- Siluet Kelopak Masjid Al-Kamil Jatigede (Ikon Sumedang) -->
+        <g transform="translate(115, 152)">
+          <path d="M95 10 C125 35, 138 68, 138 92 L52 92 C52 68, 65 35, 95 10 Z" fill="#1D63B8" stroke="#FFFFFF" stroke-width="3"/>
+          <path d="M52 28 C75 46, 85 70, 85 92 L18 92 C18 70, 28 46, 52 28 Z" fill="#38BDF8" stroke="#FFFFFF" stroke-width="2.5"/>
+          <path d="M138 28 C162 46, 172 70, 172 92 L105 92 C105 70, 115 46, 138 28 Z" fill="#38BDF8" stroke="#FFFFFF" stroke-width="2.5"/>
+          <polygon points="95,2 104,14 86,14" fill="#D99B26"/>
+        </g>
+
+        <!-- Santri Putra Ceria (Kiri) -->
+        <g transform="translate(22, 108)">
+          <!-- Tangan -->
+          <path d="M26 98 Q8 78 16 64 Q24 56 36 74" fill="#FDBA74" stroke="#0B2447" stroke-width="2.5"/>
+          <path d="M96 98 Q116 84 114 70 Q110 60 96 74" fill="#FDBA74" stroke="#0B2447" stroke-width="2.5"/>
+          <!-- Baju Koko Putih -->
+          <path d="M32 88 L90 88 L98 148 L24 148 Z" fill="#FFFFFF" stroke="#144272" stroke-width="3"/>
+          <path d="M52 88 L61 102 L70 88" fill="none" stroke="#1D63B8" stroke-width="3"/>
+          <!-- Kepala & Peci Putih -->
+          <circle cx="61" cy="58" r="28" fill="#FED7AA" stroke="#0B2447" stroke-width="2.5"/>
+          <path d="M33 48 C33 22, 89 22, 89 48 Z" fill="#FFFFFF" stroke="#144272" stroke-width="3"/>
+          <!-- Mata & Senyum -->
+          <path d="M47 56 Q52 50 57 56" fill="none" stroke="#0B2447" stroke-width="2.8" stroke-linecap="round"/>
+          <path d="M66 56 Q71 50 76 56" fill="none" stroke="#0B2447" stroke-width="2.8" stroke-linecap="round"/>
+          <path d="M53 67 Q61 77 69 67 Z" fill="#E11D48"/>
+        </g>
+
+        <!-- Santri Putri Hijab Biru Ceria (Kanan) -->
+        <g transform="translate(274, 108)">
+          <!-- Tangan -->
+          <path d="M26 98 Q8 84 10 70 Q14 60 28 74" fill="#FDBA74" stroke="#0B2447" stroke-width="2.5"/>
+          <path d="M96 98 Q114 78 106 64 Q98 56 86 74" fill="#FDBA74" stroke="#0B2447" stroke-width="2.5"/>
+          <!-- Gamis Putih -->
+          <path d="M32 88 L90 88 L98 148 L24 148 Z" fill="#FFFFFF" stroke="#144272" stroke-width="3"/>
+          <!-- Hijab Biru -->
+          <path d="M27 58 C27 20, 95 20, 95 58 C95 88, 82 112, 61 112 C40 112, 27 88, 27 58 Z" fill="#144272" stroke="#0B2447" stroke-width="2.5"/>
+          <circle cx="61" cy="60" r="24" fill="#FED7AA"/>
+          <!-- Mata & Senyum -->
+          <path d="M48 58 Q53 52 58 58" fill="none" stroke="#0B2447" stroke-width="2.8" stroke-linecap="round"/>
+          <path d="M65 58 Q70 52 75 58" fill="none" stroke="#0B2447" stroke-width="2.8" stroke-linecap="round"/>
+          <path d="M54 69 Q61 78 68 69 Z" fill="#E11D48"/>
+        </g>
+
+        <!-- Rehal / Al-Qur'an Terbuka di Bawah -->
+        <path d="M55 245 Q135 270 210 295 Q285 270 365 245 L350 282 Q275 305 210 322 Q145 305 70 282 Z" fill="url(#navyGrad)" stroke="#FFFFFF" stroke-width="3"/>
+        <path d="M65 238 Q140 262 210 286 Q280 262 355 238" fill="none" stroke="url(#goldGrad)" stroke-width="6" stroke-linecap="round"/>
+
+        <!-- Tipografi Resmi FASI XIII -->
+        <text x="210" y="362" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="40" fill="#0B2447" letter-spacing="2">FASI XIII</text>
+        <text x="210" y="384" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="13.5" fill="#144272" letter-spacing="2.5">TINGKAT PROVINSI JAWA BARAT</text>
+        <rect x="75" y="394" width="270" height="22" rx="11" fill="#0B2447"/>
+        <text x="210" y="409" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="11" fill="#F3C65F" letter-spacing="1.2">SUMEDANG, 19–21 DESEMBER 2026</text>
+      </svg>
+    `;
+
+    // 2. INITIAL DEFAULT DATA (REALISTIS UNTUK KABUPATEN SUMEDANG)
+    const DEFAULT_STATE = {
+      settings: {
+        heroTitle: "FASI XIII TINGKAT PROVINSI JAWA BARAT",
+        heroSubtitle: "Kabupaten Sumedang • 19 – 21 Desember 2026",
+        heroDesc: "Portal informasi resmi Festival Anak Shaleh Indonesia ke-13 (FASI XIII) Tingkat Provinsi Jawa Barat. Temukan lokasi venue perlombaan, panduan destinasi wisata unggulan, serta kuliner legendaris di pusat kota Kabupaten Sumedang.",
+        runningText: "Selamat Datang Kafilah FASI XIII Tingkat Provinsi Jawa Barat di Kabupaten Sumedang (19 – 21 Desember 2026) • Jaga Sportivitas, Ukhuwah Islamiyah, dan Kebersihan di Seluruh Arena Lomba!",
+        customLogoBase64: "" // Kosong = gunakan DEFAULT_OFFICIAL_LOGO_SVG
+      },
+      // Kredensial admin TIDAK disimpan di dalam HTML.
+      // Autentikasi dikelola oleh Supabase Auth.
+      admin: {},
+      berita: [
+        {
+          id: "b1",
+          title: "Sumedang Matangkan Kesiapan Venue & Penyambutan Kafilah FASI XIII Jawa Barat",
+          category: "Persiapan & Venue",
+          author: "Tim Humas Panitia Lokal FASI XIII",
+          date: "2026-11-18",
+          status: "Terbit",
+          featured: true,
+          syncRunningText: true,
+          coverImage: "",
+          tags: ["Sumedang", "Venue Lomba", "Masjid Agung", "Al-Kamil Jatigede"],
+          excerpt: "Pemerintah Kabupaten Sumedang bersama LPPTKA-BKPRMI Jawa Barat memastikan kesiapan masjid, gedung pertemuan, serta jalur pelayanan kafilah menjelang pembukaan 19 Desember 2026.",
+          content: [
+            "Kabupaten Sumedang terus mematangkan persiapan akhir menjelang perhelatan akbar Festival Anak Shaleh Indonesia (FASI) XIII Tingkat Provinsi Jawa Barat yang dijadwalkan berlangsung pada 19–21 Desember 2026.",
+            "Sejumlah lokasi strategis di sekitar pusat kota dan kawasan ikonik Sumedang telah disiapkan sebagai arena perlombaan berbagai jenjang, mulai dari TKA, TPA, hingga TQA. Masjid Agung Sumedang, Kawasan Masjid Al-Kamil Jatigede, Gedung Negara, hingga Aula Islamic Center Sumedang disiapkan dengan fasilitas pendukung yang ramah santri dan pendamping.",
+            "Panitia lokal juga mengkoordinasikan layanan informasi rute, titik penjemputan kafilah dari 27 kabupaten/kota se-Jawa Barat, serta penyediaan peta lokasi digital agar seluruh peserta dapat menjangkau venue perlombaan dengan mudah dan tepat waktu."
+          ]
+        },
+        {
+          id: "b2",
+          title: "Panduan Registrasi Kafilah, Verifikasi Berkas & Technical Meeting Peserta",
+          category: "Pengumuman Resmi",
+          author: "Sekretariat Panitia Pelaksana",
+          date: "2026-11-20",
+          status: "Terbit",
+          featured: false,
+          syncRunningText: false,
+          coverImage: "",
+          tags: ["Registrasi", "Technical Meeting", "Pengumuman", "Kafilah"],
+          excerpt: "Informasi penting bagi pimpinan kafilah kabupaten/kota mengenai alur daftar ulang, kelengkapan administrasi santri, dan agenda technical meeting per cabang lomba.",
+          content: [
+            "Seluruh kontingen atau kafilah dari 27 kabupaten/kota di Provinsi Jawa Barat diimbau memperhatikan jadwal registrasi ulang dan verifikasi administrasi peserta sebelum hari pelaksanaan lomba dimulai.",
+            "Setiap ketua kafilah diharapkan membawa rekapitulasi resmi peserta per cabang dan jenjang lomba, surat mandat resmi daerah, serta dokumen identitas pendukung sesuai ketentuan pedoman teknis FASI XIII Jawa Barat.",
+            "Sesi technical meeting akan membahas tata tertib arena lomba, sistem penilaian, alur pemanggilan peserta, serta ketentuan waktu tampil untuk setiap cabang agar jalannya kompetisi berlangsung tertib, objektif, dan penuh ukhuwah."
+          ]
+        },
+        {
+          id: "b3",
+          title: "Menjelajah Pesona Religi & Kuliner Pusat Kota Sumedang Saat Mendampingi Kafilah",
+          category: "Budaya & Kuliner",
+          author: "Redaksi Wisata & Kuliner Sumedang",
+          date: "2026-11-22",
+          status: "Terbit",
+          featured: false,
+          syncRunningText: false,
+          coverImage: "",
+          tags: ["Kuliner Sumedang", "Tahu Sumedang", "Alun-Alun", "Wisata Religi"],
+          excerpt: "Selain mengikuti rangkaian lomba, keluarga dan pendamping kafilah dapat menikmati suasana sejuk pusat kota Sumedang, wisata sejarah, hingga kuliner legendaris khas Tatar Sunda.",
+          content: [
+            "Berkunjung ke Kabupaten Sumedang selama penyelenggaraan FASI XIII memberikan pengalaman lengkap bagi keluarga dan pendamping kafilah. Di kawasan pusat kota, Alun-Alun Sumedang, Masjid Agung, serta Museum Prabu Geusan Ulun berada dalam jangkauan yang saling berdekatan.",
+            "Bagi pecinta kuliner, pusat kota Sumedang menawarkan beragam sajian khas mulai dari Tahu Sumedang legendaris yang hangat dan gurih, Soto Bongko, hingga aneka rumah makan Sunda seperti nasi liwet, gurame bakar, dan sate yang cocok untuk rombongan.",
+            "Kunjungi tab Rekomendasi Wisata Sumedang dan Kuliner Pusat Kota pada portal ini untuk melihat detail jam operasional, kisaran harga, serta navigasi peta langsung menuju lokasi."
+          ]
+        }
+      ],
+      venues: [
+        {
+          id: "v1",
+          branch: "Tartil Al-Qur'an & Tilawah",
+          category: "TKA",
+          venueName: "Masjid Agung Sumedang",
+          schedule: "Sabtu, 19 Des 2026 • 08.00 - 16.00 WIB",
+          address: "Jl. Prabu Geusan Ulun No.1, Regol Wetan, Kec. Sumedang Selatan, Kab. Sumedang",
+          mapsQuery: "Masjid Agung Sumedang"
+        },
+        {
+          id: "v2",
+          branch: "Adzan & Iqamah",
+          category: "TPA",
+          venueName: "Masjid Al-Kamil Jatigede",
+          schedule: "Sabtu, 19 Des 2026 • 09.00 - 15.30 WIB",
+          address: "Kawasan Wisata Jatigede, Jemah, Kec. Jatigede, Kab. Sumedang",
+          mapsQuery: "Masjid Al Kamil Jatigede Sumedang"
+        },
+        {
+          id: "v3",
+          branch: "Peragaan Shalat Berjamaah",
+          category: "TKA",
+          venueName: "Gedung Negara / Pendopo Sumedang",
+          schedule: "Minggu, 20 Des 2026 • 08.00 - 15.00 WIB",
+          address: "Jl. Prabu Geusan Ulun No.36, Regol Wetan, Kec. Sumedang Selatan, Kab. Sumedang",
+          mapsQuery: "Gedung Negara Sumedang"
+        },
+        {
+          id: "v4",
+          branch: "Cerdas Cermat Al-Qur'an (CCQ)",
+          category: "TPA",
+          venueName: "Aula Islamic Center Sumedang",
+          schedule: "Sabtu–Minggu, 19–20 Des 2026 • 08.30 WIB",
+          address: "Jl. Kutamaya No.25, Kotakulon, Kec. Sumedang Selatan, Kab. Sumedang",
+          mapsQuery: "Islamic Center Sumedang"
+        },
+        {
+          id: "v5",
+          branch: "Nasyid Islami & Kisah Islami",
+          category: "TPA",
+          venueName: "GOR Tajimalela Sumedang",
+          schedule: "Minggu, 20 Des 2026 • 08.00 - 17.00 WIB",
+          address: "Jl. Pacuan Kuda, Kotakaler, Kec. Sumedang Utara, Kab. Sumedang",
+          mapsQuery: "GOR Tajimalela Sumedang"
+        },
+        {
+          id: "v6",
+          branch: "Tahfidz Juz 'Amma & Syarhil Qur'an",
+          category: "TQA",
+          venueName: "Aula Kantor Kemenag Kab. Sumedang",
+          schedule: "Sabtu, 19 Des 2026 • 08.00 - 16.00 WIB",
+          address: "Jl. Mayor Abdurahman No.209, Kotakaler, Kec. Sumedang Utara, Kab. Sumedang",
+          mapsQuery: "Kantor Kementerian Agama Kabupaten Sumedang"
+        },
+        {
+          id: "v7",
+          branch: "Mewarnai Gambar & Kaligrafi",
+          category: "UMUM",
+          venueName: "Gedung Sasana Adi Guna (SAG) Sumedang",
+          schedule: "Minggu, 20 Des 2026 • 08.30 - 13.00 WIB",
+          address: "Jl. Pangeran Kornel, Regol Wetan, Kec. Sumedang Selatan, Kab. Sumedang",
+          mapsQuery: "Alun Alun Sumedang"
+        }
+      ],
+      wisata: [
+        {
+          id: "w1",
+          name: "Masjid Al-Kamil & Menara Kujang Sapasang",
+          category: "Religi",
+          hours: "06.00 – 21.00 WIB",
+          address: "Kawasan Pesisir Bendungan Jatigede, Kec. Jatigede, Kab. Sumedang",
+          description: "Ikon wisata religi dan arsitektur kebanggaan Sumedang dengan kubah kelopak bunga teratai dan panorama indah Bendungan Jatigede.",
+          mapsQuery: "Masjid Al Kamil Jatigede Sumedang",
+          color: "from-blue-600 to-indigo-800",
+          icon: "fa-mosque"
+        },
+        {
+          id: "w2",
+          name: "Alun-Alun Sumedang & Monumen Lingga",
+          category: "Sejarah",
+          hours: "24 Jam (Terbuka Umum)",
+          address: "Jl. Prabu Geusan Ulun, Regol Wetan, Pusat Kota Sumedang",
+          description: "Jantung pusat kota Sumedang yang asri dengan Monumen Lingga bersejarah, air mancur, taman bermain anak, dan bersebelahan dengan Masjid Agung.",
+          mapsQuery: "Alun Alun Sumedang",
+          color: "from-amber-500 to-orange-700",
+          icon: "fa-landmark"
+        },
+        {
+          id: "w3",
+          name: "Museum Prabu Geusan Ulun",
+          category: "Sejarah",
+          hours: "08.00 – 16.00 WIB",
+          address: "Jl. Prabu Geusan Ulun No.40, Regol Wetan, Pusat Kota Sumedang",
+          description: "Menyimpan koleksi pusaka Kerajaan Sumedang Larang termasuk Mahkota Binokasih, kereta kencana, dan gamelan kuno.",
+          mapsQuery: "Museum Prabu Geusan Ulun Sumedang",
+          color: "from-slate-700 to-slate-900",
+          icon: "fa-crown"
+        },
+        {
+          id: "w4",
+          name: "Tahura Gunung Kunci",
+          category: "Alam & Keluarga",
+          hours: "08.00 – 17.00 WIB",
+          address: "Jl. Pangeran Kornel, Kotakulon, Kec. Sumedang Selatan (Dekat Pusat Kota)",
+          description: "Taman Hutan Raya bersejarah dengan pepohonan pinus rindang dan benteng peninggalan Belanda yang sejuk hanya beberapa menit dari Alun-Alun.",
+          mapsQuery: "Tahura Gunung Kunci Sumedang",
+          color: "from-emerald-600 to-teal-800",
+          icon: "fa-tree"
+        },
+        {
+          id: "w5",
+          name: "Kampung Karuhun Eco Green Park",
+          category: "Alam & Keluarga",
+          hours: "08.00 – 17.00 WIB",
+          address: "Jl. Pagar Betis, Citengah, Kec. Sumedang Selatan, Kab. Sumedang",
+          description: "Wisata alam tepi sungai Cihonje dengan wahana edukasi anak, kolam renang alami, dan suasana pedesaan Sunda yang asri.",
+          mapsQuery: "Kampung Karuhun Sumedang",
+          color: "from-green-600 to-emerald-800",
+          icon: "fa-water"
+        },
+        {
+          id: "w6",
+          name: "Jatinangor National Park (Jans Park)",
+          category: "Alam & Keluarga",
+          hours: "08.00 – 17.00 WIB",
+          address: "Hegarmanah, Kec. Jatinangor, Kab. Sumedang",
+          description: "Taman bunga tematik bergaya kastil negeri dongeng yang sangat populer untuk rekreasi keluarga dan kafilah dengan latar Gunung Manglayang.",
+          mapsQuery: "Jatinangor National Park Sumedang",
+          color: "from-sky-500 to-blue-700",
+          icon: "fa-fort-awesome"
+        }
+      ],
+      kuliner: [
+        {
+          id: "k1",
+          name: "Tahu Bungkeng Pusat (Legendaris Sejak 1917)",
+          specialty: "Tahu Sumedang Asli & Lontong",
+          area: "Pusat Kota (Jl. 11 April)",
+          priceRange: "Rp 15.000 – Rp 50.000",
+          hours: "07.00 – 21.00 WIB",
+          address: "Jl. 11 April No.53, Kotakaler, Kec. Sumedang Utara (500m dari Alun-Alun)",
+          mapsQuery: "Tahu Bungkeng Sumedang"
+        },
+        {
+          id: "k2",
+          name: "Tahu Palasari Sumedang",
+          specialty: "Tahu Renyah, Oleh-Oleh & Makanan Sunda",
+          area: "Pusat Kota (Jl. Mayor Abdurahman)",
+          priceRange: "Rp 15.000 – Rp 60.000",
+          hours: "06.30 – 21.30 WIB",
+          address: "Jl. Mayor Abdurahman No.153, Kotakaler, Kec. Sumedang Utara",
+          mapsQuery: "Tahu Palasari Sumedang"
+        },
+        {
+          id: "k3",
+          name: "Rumah Makan Saung Teko Sumedang",
+          specialty: "Nasi Liwet, Gurame Bakar, Karedok",
+          area: "Pusat Kota (Jl. Mayor Abdurahman)",
+          priceRange: "Rp 25.000 – Rp 75.000",
+          hours: "09.00 – 21.00 WIB",
+          address: "Jl. Mayor Abdurahman No.145, Kotakaler, Kec. Sumedang Utara",
+          mapsQuery: "RM Saung Teko Sumedang"
+        },
+        {
+          id: "k4",
+          name: "RM Joglo Sumedang",
+          specialty: "Paket Prasmanan Sunda & Ayam Bakakak",
+          area: "Pusat Kota (Jl. Serma Muchtar)",
+          priceRange: "Rp 25.000 – Rp 70.000",
+          hours: "09.00 – 21.00 WIB",
+          address: "Jl. Serma Muchtar No.97, Situ, Kec. Sumedang Utara, Kab. Sumedang",
+          mapsQuery: "RM Joglo Sumedang"
+        },
+        {
+          id: "k5",
+          name: "Sate Iting Pusat Kota",
+          specialty: "Sate Kambing & Sate Sapi Empuk + Gule",
+          area: "Pusat Kota (Jl. Mayor Abdurahman)",
+          priceRange: "Rp 30.000 – Rp 65.000",
+          hours: "10.00 – 21.00 WIB",
+          address: "Jl. Mayor Abdurahman No.110, Kotakaler, Pusat Kota Sumedang",
+          mapsQuery: "Sate Iting Sumedang"
+        },
+        {
+          id: "k6",
+          name: "Soto Bongko & Kuliner Alun-Alun Sumedang",
+          specialty: "Soto Bongko Khas Sumedang (Lontong Daun Patat)",
+          area: "Pusat Kota (Sekitar Alun-Alun)",
+          priceRange: "Rp 15.000 – Rp 30.000",
+          hours: "07.00 – 17.00 WIB",
+          address: "Jl. Prabu Geusan Ulun / Sekitar Alun-Alun Sumedang, Regol Wetan",
+          mapsQuery: "Alun Alun Sumedang"
+        }
+      ]
+    };
+
+    // 3. STATE MANAGEMENT: cache lokal + database cloud Supabase
+    const STORAGE_KEY = "FASI_XIII_SUMEDANG_DATA_V2";
+    const AUTH_SESSION_KEY = "FASI_XIII_ADMIN_LOGGED_IN"; // hanya penanda UI; bukan sumber otorisasi
+    let appState = loadAppState();
+    let currentWisataFilter = "ALL";
+    let currentBeritaFilter = "ALL";
+    let activeReaderBeritaId = null;
+
+    function loadAppState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          return {
+            settings: { ...DEFAULT_STATE.settings, ...(parsed.settings || {}) },
+            admin: {},
+            berita: Array.isArray(parsed.berita) ? parsed.berita : DEFAULT_STATE.berita,
+            venues: Array.isArray(parsed.venues) ? parsed.venues : DEFAULT_STATE.venues,
+            wisata: Array.isArray(parsed.wisata) ? parsed.wisata : DEFAULT_STATE.wisata,
+            kuliner: Array.isArray(parsed.kuliner) ? parsed.kuliner : DEFAULT_STATE.kuliner
+          };
+        }
+      } catch (e) { console.error("Gagal membaca cache lokal:", e); }
+      return JSON.parse(JSON.stringify(DEFAULT_STATE));
+    }
+
+    async function loadCloudState() {
+      if (!supabaseClient) return;
+      const { data, error } = await supabaseClient.from("fasi_site_data").select("data").eq("id", "main").maybeSingle();
+      if (error) { console.error(error); showToast("Data cloud belum dapat dimuat. Periksa konfigurasi Supabase.", "error"); return; }
+      if (data && data.data) {
+        const parsed = data.data;
+        appState = {
+          settings: { ...DEFAULT_STATE.settings, ...(parsed.settings || {}) }, admin: {},
+          berita: Array.isArray(parsed.berita) ? parsed.berita : DEFAULT_STATE.berita,
+          venues: Array.isArray(parsed.venues) ? parsed.venues : DEFAULT_STATE.venues,
+          wisata: Array.isArray(parsed.wisata) ? parsed.wisata : DEFAULT_STATE.wisata,
+          kuliner: Array.isArray(parsed.kuliner) ? parsed.kuliner : DEFAULT_STATE.kuliner
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      } else {
+        // Inisialisasi pertama: simpan data bawaan hanya bila admin sudah login.
+        console.info("Data cloud belum dibuat. Admin dapat melakukan penyimpanan pertama.");
+      }
+    }
+
+    async function saveAppState() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appState)); }
+      catch (e) { showToast("Cache browser penuh. Kurangi ukuran gambar logo.", "error"); }
+      if (!supabaseClient) {
+        showToast("Mode lokal: hubungkan Supabase agar data tersinkron antarperangkat.", "error");
+        return;
+      }
+      const { data: sessionData } = await supabaseClient.auth.getSession();
+      if (!sessionData?.session) {
+        showToast("Sesi admin tidak aktif. Silakan login kembali.", "error");
+        return;
+      }
+      const payload = { id: "main", data: { settings: appState.settings, berita: appState.berita, venues: appState.venues, wisata: appState.wisata, kuliner: appState.kuliner }, updated_at: new Date().toISOString() };
+      const { error } = await supabaseClient.from("fasi_site_data").upsert(payload, { onConflict: "id" });
+      if (error) { console.error(error); showToast("Gagal menyimpan ke database cloud: " + error.message, "error"); }
+    }
+
+    // 4. TOAST NOTIFICATION HELPER
+    function showToast(message, type = "success") {
+      const container = document.getElementById("toastContainer");
+      const toast = document.createElement("div");
+      const bgClass = type === "error" ? "bg-rose-600" : type === "info" ? "bg-fasi-navy" : "bg-emerald-600";
+      const iconClass = type === "error" ? "fa-circle-exclamation" : type === "info" ? "fa-circle-info" : "fa-circle-check";
+
+      toast.className = `${bgClass} text-white px-4 py-3 rounded-2xl shadow-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 pointer-events-auto transition-all duration-300 transform translate-y-2 opacity-0`;
+      toast.innerHTML = `<i class="fa-solid ${iconClass}"></i><span>${escapeHTML(message)}</span>`;
+      container.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove("translate-y-2", "opacity-0");
+      });
+
+      setTimeout(() => {
+        toast.classList.add("opacity-0", "translate-y-2");
+        setTimeout(() => toast.remove(), 300);
+      }, 3200);
+    }
+
+    function escapeHTML(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    // 5. RENDER LOGO & GENERAL SETTINGS
+    function renderLogosAndSettings() {
+      const { settings } = appState;
+      document.getElementById("heroTitleDisplay").textContent = settings.heroTitle;
+      document.getElementById("heroSubtitleDisplay").innerHTML = `<i class="fa-solid fa-location-dot"></i><span>${escapeHTML(settings.heroSubtitle)}</span>`;
+      document.getElementById("heroDescDisplay").textContent = settings.heroDesc;
+
+      const syncedNews = appState.berita.find(b => b.status === "Terbit" && b.syncRunningText);
+      const activeRunningText = syncedNews
+        ? `${settings.runningText} • [TERBARU: ${syncedNews.title}]`
+        : settings.runningText;
+      document.getElementById("runningTextDisplay").textContent = activeRunningText;
+
+      const hasCustomLogo = settings.customLogoBase64 && settings.customLogoBase64.startsWith("data:image");
+
+      // Header & Footer small logo
+      const smallLogoHTML = hasCustomLogo
+        ? `<img src="${settings.customLogoBase64}" alt="Logo FASI XIII" class="w-full h-full object-contain rounded-xl bg-white" />`
+        : `<svg viewBox="0 0 100 100" class="w-full h-full"><circle cx="50" cy="50" r="46" fill="#FFFFFF"/><path d="M50 12 C68 28, 84 35, 86 62 C88 80, 70 88, 50 90 C30 88, 12 80, 14 62 C16 35, 32 28, 50 12 Z" fill="#1D63B8"/><text x="50" y="62" text-anchor="middle" font-weight="900" font-size="22" fill="#F3C65F">XIII</text></svg>`;
+
+      document.getElementById("headerLogoWrapper").innerHTML = smallLogoHTML;
+      document.getElementById("footerLogoWrapper").innerHTML = smallLogoHTML;
+
+      // Hero & Admin Preview Large Logo
+      const largeLogoHTML = hasCustomLogo
+        ? `<img src="${settings.customLogoBase64}" alt="Logo Resmi FASI XIII Jawa Barat" class="max-h-72 w-auto mx-auto rounded-2xl object-contain" />`
+        : DEFAULT_OFFICIAL_LOGO_SVG;
+
+      document.getElementById("heroLogoContainer").innerHTML = largeLogoHTML;
+      const adminPreview = document.getElementById("adminLogoPreview");
+      if (adminPreview) {
+        adminPreview.innerHTML = hasCustomLogo
+          ? `<img src="${settings.customLogoBase64}" alt="Preview Logo" class="w-full h-full object-contain" />`
+          : `<span class="text-[10px] font-bold text-fasi-navy text-center leading-tight">Emblem SVG Resmi</span>`;
+      }
+
+      // Update Stats
+      document.getElementById("statVenues").textContent = appState.venues.length;
+      document.getElementById("statWisata").textContent = appState.wisata.length;
+      document.getElementById("statKuliner").textContent = appState.kuliner.length;
+    }
+
+    // 6. COUNTDOWN TIMER (19 DESEMBER 2026, 08:00 WIB)
+    function startCountdown() {
+      const targetDate = new Date("2026-12-19T08:00:00+07:00").getTime();
+
+      function updateTimer() {
+        const now = Date.now();
+        const distance = targetDate - now;
+
+        if (distance <= 0) {
+          document.getElementById("cdDays").textContent = "00";
+          document.getElementById("cdHours").textContent = "00";
+          document.getElementById("cdMinutes").textContent = "00";
+          document.getElementById("cdSeconds").textContent = "00";
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("cdDays").textContent = String(days).padStart(2, "0");
+        document.getElementById("cdHours").textContent = String(hours).padStart(2, "0");
+        document.getElementById("cdMinutes").textContent = String(minutes).padStart(2, "0");
+        document.getElementById("cdSeconds").textContent = String(seconds).padStart(2, "0");
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    }
+
+    // 7. RENDER PUBLIC SECTIONS (BERITA, VENUE, WISATA, KULINER)
+    function formatIndonesianDate(dateStr) {
+      if (!dateStr) return "Desember 2026";
+      const parts = dateStr.split("-");
+      if (parts.length !== 3) return dateStr;
+      const months = [
+        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+      ];
+      const day = parseInt(parts[2], 10);
+      const month = months[parseInt(parts[1], 10) - 1] || parts[1];
+      const year = parts[0];
+      return `${day} ${month} ${year}`;
+    }
+
+    function estimateReadTime(paragraphs) {
+      const text = Array.isArray(paragraphs) ? paragraphs.join(" ") : String(paragraphs || "");
+      const words = text.trim().split(/\s+/).filter(Boolean).length;
+      const minutes = Math.max(1, Math.ceil(words / 180));
+      return `${minutes} menit baca`;
+    }
+
+    function renderBeritaCoverVisual(item, heightClass = "h-48") {
+      if (item.coverImage && (item.coverImage.startsWith("data:image") || item.coverImage.startsWith("http"))) {
+        return `
+          <div class="${heightClass} w-full bg-slate-100 overflow-hidden relative">
+            <img src="${escapeHTML(item.coverImage)}" alt="${escapeHTML(item.title)}" onerror="this.parentElement.innerHTML = buildFallbackBeritaIllustration('${escapeHTML(item.category)}', '${heightClass}')" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          </div>
+        `;
+      }
+      return buildFallbackBeritaIllustration(item.category, heightClass);
+    }
+
+    function buildFallbackBeritaIllustration(category, heightClass = "h-48") {
+      const palette = {
+        "Pengumuman Resmi": { grad: "from-fasi-navy via-fasi-royal to-fasi-blue", icon: "fa-bullhorn", label: "PENGUMUMAN RESMI FASI XIII" },
+        "Persiapan & Venue": { grad: "from-blue-900 via-fasi-blue to-sky-600", icon: "fa-mosque", label: "ARENA & VENUE SUMEDANG" },
+        "Kafilah & Prestasi": { grad: "from-amber-700 via-fasi-gold to-amber-500", icon: "fa-award", label: "KAFILAH JAWA BARAT" },
+        "Budaya & Kuliner": { grad: "from-emerald-800 via-teal-700 to-emerald-600", icon: "fa-utensils", label: "SUMEDANG INSUN MEDAL" }
+      };
+      const cfg = palette[category] || palette["Pengumuman Resmi"];
+
+      return `
+        <div class="${heightClass} w-full bg-gradient-to-br ${cfg.grad} p-5 flex flex-col justify-between relative overflow-hidden">
+          <svg viewBox="0 0 200 120" class="w-44 h-44 text-white/10 absolute -right-4 -bottom-4 pointer-events-none" fill="currentColor">
+            <path d="M100 10 C130 35, 165 45, 175 85 C180 105, 150 115, 100 118 C50 115, 20 105, 25 85 C35 45, 70 35, 100 10 Z"/>
+          </svg>
+          <div class="relative z-10 flex items-center justify-between">
+            <span class="text-[10px] font-extrabold tracking-widest uppercase text-white/85 bg-black/20 px-2.5 py-1 rounded-lg">${cfg.label}</span>
+            <i class="fa-solid ${cfg.icon} text-white/40 text-xl"></i>
+          </div>
+          <div class="relative z-10 flex items-center gap-2 text-white/90 text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-fasi-goldLight"></span>
+            <span>FASI XIII • 19–21 Desember 2026</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function setBeritaFilter(filter) {
+      currentBeritaFilter = filter;
+      document.querySelectorAll(".berita-filter-btn").forEach(btn => {
+        if (btn.dataset.filter === filter) {
+          btn.className = "berita-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-fasi-navy text-white shadow-sm transition cursor-pointer";
+        } else {
+          btn.className = "berita-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition cursor-pointer";
+        }
+      });
+      renderBerita();
+    }
+
+    function renderBerita() {
+      const grid = document.getElementById("beritaGrid");
+      const featuredBanner = document.getElementById("featuredBeritaBanner");
+      const search = (document.getElementById("searchBeritaInput")?.value || "").toLowerCase().trim();
+
+      const published = appState.berita.filter(item => item.status === "Terbit");
+      const sorted = [...published].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+
+      const filtered = sorted.filter(item => {
+        const matchCat = currentBeritaFilter === "ALL" || item.category === currentBeritaFilter;
+        const tagsText = Array.isArray(item.tags) ? item.tags.join(" ") : String(item.tags || "");
+        const bodyText = Array.isArray(item.content) ? item.content.join(" ") : String(item.content || "");
+        const matchSearch =
+          !search ||
+          item.title.toLowerCase().includes(search) ||
+          item.excerpt.toLowerCase().includes(search) ||
+          bodyText.toLowerCase().includes(search) ||
+          (item.author || "").toLowerCase().includes(search) ||
+          tagsText.toLowerCase().includes(search);
+        return matchCat && matchSearch;
+      });
+
+      // Banner Berita Utama jika tidak sedang mencari atau menyaring ketat
+      const highlightItem = sorted.find(x => x.featured) || sorted[0];
+      if (highlightItem && currentBeritaFilter === "ALL" && !search) {
+        featuredBanner.innerHTML = `
+          <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200/90 grid grid-cols-1 lg:grid-cols-12 group">
+            <div class="lg:col-span-5">
+              ${renderBeritaCoverVisual(highlightItem, "h-56 lg:h-full min-h-[240px]")}
+            </div>
+            <div class="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between">
+              <div>
+                <div class="flex flex-wrap items-center gap-2 mb-3">
+                  <span class="px-3 py-1 rounded-full bg-fasi-gold text-fasi-navy text-xs font-extrabold">
+                    <i class="fa-solid fa-star mr-1"></i> Berita Utama
+                  </span>
+                  <span class="px-3 py-1 rounded-full bg-fasi-sky text-fasi-blue text-xs font-bold">
+                    ${escapeHTML(highlightItem.category)}
+                  </span>
+                  <span class="text-xs text-slate-400 font-semibold ml-auto">
+                    ${formatIndonesianDate(highlightItem.date)} &bull; ${estimateReadTime(highlightItem.content)}
+                  </span>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-fasi-navy group-hover:text-fasi-blue transition leading-snug">
+                  ${escapeHTML(highlightItem.title)}
+                </h3>
+                <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                  ${escapeHTML(highlightItem.excerpt)}
+                </p>
+              </div>
+              <div class="pt-5 mt-5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                <span class="text-xs font-semibold text-slate-500">
+                  <i class="fa-regular fa-user text-fasi-blue mr-1"></i> ${escapeHTML(highlightItem.author || "Panitia FASI XIII")}
+                </span>
+                <button onclick="openBeritaReader('${highlightItem.id}')" class="px-5 py-2.5 rounded-xl bg-fasi-navy hover:bg-fasi-royal text-white text-xs sm:text-sm font-bold inline-flex items-center gap-2 transition cursor-pointer">
+                  Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        featuredBanner.innerHTML = "";
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full bg-white rounded-3xl p-10 text-center border border-slate-200">
+            <i class="fa-regular fa-newspaper text-3xl text-slate-300 mb-2"></i>
+            <p class="font-bold text-slate-700">Artikel berita tidak ditemukan.</p>
+            <p class="text-xs text-slate-500 mt-1">Coba kata kunci lain atau pilih kategori "Semua Berita".</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => {
+        const tags = Array.isArray(item.tags) ? item.tags.slice(0, 3) : [];
+        return `
+          <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-200/80 transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              ${renderBeritaCoverVisual(item, "h-44")}
+              <div class="p-5 sm:p-6">
+                <div class="flex items-center justify-between gap-2 mb-2.5">
+                  <span class="px-2.5 py-1 rounded-full bg-fasi-sky text-fasi-blue text-[11px] font-extrabold">
+                    ${escapeHTML(item.category)}
+                  </span>
+                  <span class="text-[11px] font-semibold text-slate-400">
+                    ${formatIndonesianDate(item.date)} &bull; ${estimateReadTime(item.content)}
+                  </span>
+                </div>
+
+                <h3 class="text-lg font-extrabold text-fasi-navy group-hover:text-fasi-blue transition leading-snug line-clamp-2">
+                  ${escapeHTML(item.title)}
+                </h3>
+
+                <p class="text-xs sm:text-sm text-slate-600 mt-2.5 leading-relaxed line-clamp-3">
+                  ${escapeHTML(item.excerpt)}
+                </p>
+
+                ${tags.length ? `
+                  <div class="flex flex-wrap gap-1.5 mt-4">
+                    ${tags.map(t => `<span class="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">#${escapeHTML(t)}</span>`).join("")}
+                  </div>
+                ` : ""}
+              </div>
+            </div>
+
+            <div class="px-5 sm:px-6 pb-5 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <span class="text-xs text-slate-500 font-semibold truncate">
+                <i class="fa-regular fa-user mr-1 text-slate-400"></i>${escapeHTML(item.author || "Panitia")}
+              </span>
+              <button onclick="openBeritaReader('${item.id}')" class="px-4 py-2 rounded-xl bg-fasi-navy hover:bg-fasi-royal text-white text-xs font-bold inline-flex items-center gap-1.5 shrink-0 transition cursor-pointer">
+                Baca Selengkapnya <i class="fa-solid fa-arrow-right text-[11px]"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function openBeritaReader(id) {
+      const item = appState.berita.find(b => b.id === id);
+      if (!item) return;
+      activeReaderBeritaId = id;
+
+      document.getElementById("readerCategoryBadge").textContent = item.category;
+      document.getElementById("readerReadTime").textContent = estimateReadTime(item.content);
+      document.getElementById("readerCoverContainer").innerHTML = renderBeritaCoverVisual(item, "h-56 sm:h-72");
+      document.getElementById("readerTitle").textContent = item.title;
+      document.getElementById("readerAuthor").textContent = item.author || "Panitia FASI XIII Sumedang";
+      document.getElementById("readerDate").textContent = formatIndonesianDate(item.date);
+      document.getElementById("readerExcerpt").textContent = item.excerpt;
+
+      const paragraphs = Array.isArray(item.content) ? item.content : String(item.content || "").split(/\n\n+/);
+      document.getElementById("readerBody").innerHTML = paragraphs
+        .map(p => p.trim())
+        .filter(Boolean)
+        .map(p => `<p>${escapeHTML(p)}</p>`)
+        .join("");
+
+      const tags = Array.isArray(item.tags) ? item.tags : [];
+      document.getElementById("readerTagsContainer").innerHTML = tags
+        .map(t => `<span class="text-xs font-bold text-fasi-blue bg-fasi-sky px-3 py-1 rounded-full">#${escapeHTML(t)}</span>`)
+        .join("");
+
+      const others = appState.berita.filter(b => b.status === "Terbit" && b.id !== id).slice(0, 2);
+      document.getElementById("readerRelatedList").innerHTML = others.length
+        ? others.map(rel => `
+            <button onclick="openBeritaReader('${rel.id}')" class="text-left p-3.5 rounded-2xl border border-slate-200 hover:border-fasi-blue hover:bg-fasi-sky/30 transition cursor-pointer">
+              <span class="text-[10px] font-extrabold uppercase text-fasi-blue">${escapeHTML(rel.category)}</span>
+              <p class="text-xs sm:text-sm font-bold text-fasi-navy mt-0.5 line-clamp-2">${escapeHTML(rel.title)}</p>
+            </button>
+          `).join("")
+        : `<p class="text-xs text-slate-400">Belum ada berita lainnya.</p>`;
+
+      document.getElementById("beritaReaderModal").classList.remove("hidden");
+    }
+
+    function closeBeritaReaderModal() {
+      document.getElementById("beritaReaderModal").classList.add("hidden");
+      activeReaderBeritaId = null;
+    }
+
+    function copyCurrentBeritaLink() {
+      const item = appState.berita.find(b => b.id === activeReaderBeritaId);
+      if (!item) return;
+      const textToCopy = `${item.title} (${formatIndonesianDate(item.date)}) - ${item.excerpt} [Portal FASI XIII Sumedang]`;
+      const helper = document.createElement("textarea");
+      helper.value = textToCopy;
+      document.body.appendChild(helper);
+      helper.select();
+      try {
+        document.execCommand("copy");
+        showToast("Ringkasan berita berhasil disalin ke clipboard!", "success");
+      } catch (e) {
+        showToast("Gagal menyalin teks.", "error");
+      }
+      helper.remove();
+    }
+
+    function renderVenues() {
+      const grid = document.getElementById("venuesGrid");
+      const search = document.getElementById("searchVenueInput").value.toLowerCase().trim();
+      const cat = document.getElementById("filterVenueCategory").value;
+
+      const filtered = appState.venues.filter(item => {
+        const matchCat = cat === "ALL" || item.category === cat;
+        const matchSearch =
+          item.branch.toLowerCase().includes(search) ||
+          item.venueName.toLowerCase().includes(search) ||
+          item.address.toLowerCase().includes(search);
+        return matchCat && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full bg-white rounded-3xl p-10 text-center border border-slate-200">
+            <i class="fa-solid fa-magnifying-glass text-3xl text-slate-300 mb-2"></i>
+            <p class="font-bold text-slate-700">Cabang lomba atau venue tidak ditemukan.</p>
+            <p class="text-xs text-slate-500 mt-1">Coba ubah kata kunci pencarian atau pilih kategori jenjang lainnya.</p>
+          </div>`;
+        return;
+      }
+
+      const badgeColors = {
+        TKA: "bg-sky-100 text-sky-800 border-sky-200",
+        TPA: "bg-blue-100 text-blue-800 border-blue-200",
+        TQA: "bg-amber-100 text-amber-800 border-amber-200",
+        UMUM: "bg-emerald-100 text-emerald-800 border-emerald-200"
+      };
+
+      grid.innerHTML = filtered.map(v => `
+        <div class="bg-white rounded-3xl p-6 shadow-sm hover:shadow-xl border border-slate-200/80 transition-all duration-300 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold border ${badgeColors[v.category] || badgeColors.UMUM}">
+                Jenjang ${escapeHTML(v.category)}
+              </span>
+              <span class="text-xs font-semibold text-slate-400 flex items-center gap-1">
+                <i class="fa-regular fa-calendar"></i> FASI XIII
+              </span>
+            </div>
+
+            <h3 class="text-lg font-extrabold text-fasi-navy group-hover:text-fasi-blue transition leading-snug">
+              ${escapeHTML(v.branch)}
+            </h3>
+
+            <div class="mt-4 p-3.5 rounded-2xl bg-fasi-sky/50 border border-blue-100 space-y-2">
+              <div class="flex items-start gap-2.5">
+                <i class="fa-solid fa-building-columns text-fasi-blue mt-1 text-sm shrink-0"></i>
+                <div>
+                  <p class="text-[11px] font-bold uppercase text-slate-400">Lokasi Gedung / Venue</p>
+                  <p class="text-sm font-extrabold text-fasi-navy">${escapeHTML(v.venueName)}</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <i class="fa-regular fa-clock text-fasi-gold mt-0.5 text-sm shrink-0"></i>
+                <p class="text-xs font-semibold text-slate-700">${escapeHTML(v.schedule)}</p>
+              </div>
+            </div>
+
+            <p class="text-xs text-slate-500 mt-3 flex items-start gap-2 leading-relaxed">
+              <i class="fa-solid fa-location-dot text-rose-500 mt-0.5 shrink-0"></i>
+              <span>${escapeHTML(v.address)}</span>
+            </p>
+          </div>
+
+          <div class="pt-5 mt-5 border-t border-slate-100 flex items-center gap-2">
+            <button onclick="openMapsModal('${escapeHTML(v.venueName)} (${escapeHTML(v.branch)})', '${escapeHTML(v.address)}', '${escapeHTML(v.mapsQuery || v.venueName)}', 'Venue Lomba')" class="flex-1 py-2.5 px-3 rounded-xl bg-fasi-navy hover:bg-fasi-royal text-white text-xs font-bold flex items-center justify-center gap-1.5 transition cursor-pointer">
+              <i class="fa-solid fa-map-location-dot text-fasi-goldLight"></i> Lihat Peta Venue
+            </button>
+            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v.mapsQuery || v.venueName)}" target="_blank" rel="noopener noreferrer" title="Buka langsung di Google Maps" class="py-2.5 px-3.5 rounded-xl bg-slate-100 hover:bg-fasi-sky text-fasi-blue text-xs font-bold transition">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function setWisataFilter(filter) {
+      currentWisataFilter = filter;
+      document.querySelectorAll(".wisata-filter-btn").forEach(btn => {
+        if (btn.dataset.filter === filter) {
+          btn.className = "wisata-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-fasi-navy text-white shadow-sm transition";
+        } else {
+          btn.className = "wisata-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition";
+        }
+      });
+      renderWisata();
+    }
+
+    function renderWisata() {
+      const grid = document.getElementById("wisataGrid");
+      const filtered = appState.wisata.filter(w => currentWisataFilter === "ALL" || w.category === currentWisataFilter);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full bg-white rounded-3xl p-8 text-center text-slate-500 text-sm">Belum ada data wisata untuk kategori ini.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(w => `
+        <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-200/80 transition-all duration-300 flex flex-col justify-between group">
+          <div>
+            <!-- Visual Banner Header Kartu -->
+            <div class="h-36 bg-gradient-to-br ${w.color || 'from-fasi-navy to-fasi-blue'} p-5 flex flex-col justify-between relative overflow-hidden">
+              <i class="fa-solid ${w.icon || 'fa-mountain-sun'} text-white/15 text-7xl absolute -right-3 -bottom-3 group-hover:scale-110 transition-transform"></i>
+              <div class="flex items-center justify-between relative z-10">
+                <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-bold border border-white/25">
+                  ${escapeHTML(w.category)}
+                </span>
+                <span class="text-white/90 text-xs font-semibold bg-black/20 px-2.5 py-1 rounded-lg">
+                  <i class="fa-regular fa-clock mr-1"></i>${escapeHTML(w.hours)}
+                </span>
+              </div>
+              <h3 class="text-white font-extrabold text-lg leading-snug relative z-10 drop-shadow-sm">
+                ${escapeHTML(w.name)}
+              </h3>
+            </div>
+
+            <div class="p-5 space-y-3">
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                ${escapeHTML(w.description)}
+              </p>
+              <p class="text-xs text-slate-500 flex items-start gap-2 pt-1">
+                <i class="fa-solid fa-location-dot text-emerald-600 mt-0.5 shrink-0"></i>
+                <span>${escapeHTML(w.address)}</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="px-5 pb-5 pt-2 flex items-center gap-2">
+            <button onclick="openMapsModal('${escapeHTML(w.name)}', '${escapeHTML(w.address)}', '${escapeHTML(w.mapsQuery || w.name)}', 'Wisata Sumedang')" class="flex-1 py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition cursor-pointer">
+              <i class="fa-solid fa-map-pin"></i> Peta & Rute Wisata
+            </button>
+            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(w.mapsQuery || w.name)}" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3.5 rounded-xl bg-slate-100 hover:bg-emerald-50 text-emerald-700 text-xs font-bold transition">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderKuliner() {
+      const grid = document.getElementById("kulinerGrid");
+      const search = document.getElementById("searchKulinerInput").value.toLowerCase().trim();
+
+      const filtered = appState.kuliner.filter(k =>
+        k.name.toLowerCase().includes(search) ||
+        k.specialty.toLowerCase().includes(search) ||
+        k.area.toLowerCase().includes(search) ||
+        k.address.toLowerCase().includes(search)
+      );
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full bg-white rounded-3xl p-8 text-center text-slate-500 text-sm">Tempat makan yang dicari tidak ditemukan.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(k => `
+        <div class="bg-white rounded-3xl p-6 shadow-sm hover:shadow-xl border border-slate-200/80 transition-all duration-300 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-extrabold border border-amber-200">
+                <i class="fa-solid fa-location-crosshairs mr-1"></i>${escapeHTML(k.area)}
+              </span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg">
+                ${escapeHTML(k.priceRange)}
+              </span>
+            </div>
+
+            <h3 class="text-lg font-extrabold text-fasi-navy group-hover:text-amber-700 transition leading-snug">
+              ${escapeHTML(k.name)}
+            </h3>
+
+            <div class="mt-3 p-3 rounded-2xl bg-amber-50/70 border border-amber-100">
+              <p class="text-[11px] font-bold uppercase text-amber-800">Menu Andalan</p>
+              <p class="text-xs sm:text-sm font-bold text-slate-800 mt-0.5">${escapeHTML(k.specialty)}</p>
+            </div>
+
+            <div class="mt-3 space-y-1.5 text-xs text-slate-500">
+              <p class="flex items-center gap-2">
+                <i class="fa-regular fa-clock text-fasi-gold w-4"></i>
+                <span>Buka: <strong class="text-slate-700">${escapeHTML(k.hours)}</strong></span>
+              </p>
+              <p class="flex items-start gap-2">
+                <i class="fa-solid fa-location-dot text-rose-500 w-4 mt-0.5 shrink-0"></i>
+                <span>${escapeHTML(k.address)}</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-5 mt-5 border-t border-slate-100 flex items-center gap-2">
+            <button onclick="openMapsModal('${escapeHTML(k.name)}', '${escapeHTML(k.address)}', '${escapeHTML(k.mapsQuery || k.name)}', 'Kuliner Pusat Kota')" class="flex-1 py-2.5 px-3 rounded-xl bg-fasi-gold hover:bg-amber-500 text-fasi-navy text-xs font-extrabold flex items-center justify-center gap-1.5 transition cursor-pointer">
+              <i class="fa-solid fa-map-location-dot"></i> Lihat Lokasi Maps
+            </button>
+            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(k.mapsQuery || k.name)}" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3.5 rounded-xl bg-slate-100 hover:bg-amber-50 text-amber-800 text-xs font-bold transition">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // 8. INTERACTIVE GOOGLE MAPS MODAL
+    function openMapsModal(title, address, query, badge) {
+      document.getElementById("mapsModalTitle").textContent = title;
+      document.getElementById("mapsModalAddress").textContent = address;
+      document.getElementById("mapsModalBadge").textContent = badge;
+
+      const encodedQuery = encodeURIComponent(query + ", Kabupaten Sumedang, Jawa Barat");
+      document.getElementById("mapsIframe").src = `https://maps.google.com/maps?q=${encodedQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+      document.getElementById("mapsExternalLink").href = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
+
+      document.getElementById("mapsModal").classList.remove("hidden");
+    }
+
+    function closeMapsModal() {
+      document.getElementById("mapsModal").classList.add("hidden");
+      document.getElementById("mapsIframe").src = "";
+    }
+
+    // 9. NAVIGATION & MOBILE MENU
+    function toggleMobileMenu() {
+      document.getElementById("mobileMenu").classList.toggle("hidden");
+    }
+
+    function switchTab(view) {
+      const publicView = document.getElementById("publicPortalView");
+      const adminView = document.getElementById("adminDashboardView");
+
+      if (view === "admin") {
+        if (!isAdminLoggedIn()) {
+          openLoginModal();
+          return;
+        }
+        publicView.classList.add("hidden");
+        adminView.classList.remove("hidden");
+        renderAdminTables();
+        loadSettingsIntoForm();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        adminView.classList.add("hidden");
+        publicView.classList.remove("hidden");
+        renderLogosAndSettings();
+        renderBerita();
+        renderVenues();
+        renderWisata();
+        renderKuliner();
+      }
+    }
+
+    // 10. ADMIN AUTHENTICATION: Supabase Auth (server-side session)
+    function isAdminLoggedIn() { return !!currentAdminSession; }
+
+    function updateAdminNavButton() {
+      const btnText = document.getElementById("adminNavBtnText");
+      if (btnText) btnText.textContent = isAdminLoggedIn() ? "Dashboard Admin" : "Admin Login";
+    }
+
+    function handleAdminNavClick() {
+      if (isAdminLoggedIn()) switchTab("admin"); else openLoginModal();
+    }
+
+    function openLoginModal() {
+      document.getElementById("loginErrorAlert").classList.add("hidden");
+      document.getElementById("loginUsernameInput").value = "";
+      document.getElementById("loginPasswordInput").value = "";
+      document.getElementById("adminLoginModal").classList.remove("hidden");
+    }
+    function closeLoginModal() { document.getElementById("adminLoginModal").classList.add("hidden"); }
+
+    async function submitAdminLogin(e) {
+      e.preventDefault();
+      if (!supabaseClient) {
+        showToast("Supabase belum dikonfigurasi. Admin belum dapat login dengan aman.", "error");
+        return;
+      }
+      const email = document.getElementById("loginUsernameInput").value.trim();
+      const password = document.getElementById("loginPasswordInput").value;
+      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+      if (error || !data.session) {
+        document.getElementById("loginErrorAlert").classList.remove("hidden");
+        return;
+      }
+      currentAdminSession = data.session;
+      await loadCloudState();
+      closeLoginModal(); updateAdminNavButton(); switchTab("admin");
+      showToast("Berhasil masuk. Sesi diverifikasi oleh Supabase.", "success");
+    }
+
+    async function logoutAdmin() {
+      if (supabaseClient) await supabaseClient.auth.signOut();
+      currentAdminSession = null;
+      updateAdminNavButton(); switchTab("public");
+      showToast("Anda telah keluar dari Panel Admin.", "info");
+    }
+
+    // 11. ADMIN PANEL SUB-TABS & TABLES
+    function switchAdminSubTab(tabName) {
+      document.querySelectorAll(".admin-subtab-content").forEach(el => el.classList.add("hidden"));
+      document.getElementById(`admin-subtab-${tabName}`).classList.remove("hidden");
+
+      document.querySelectorAll(".admin-subtab-btn").forEach(btn => {
+        btn.className = "admin-subtab-btn px-4 py-3 rounded-xl text-xs sm:text-sm font-bold bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 whitespace-nowrap flex items-center gap-2";
+      });
+      document.getElementById(`subtab-btn-${tabName}`).className = "admin-subtab-btn px-4 py-3 rounded-xl text-xs sm:text-sm font-bold bg-fasi-blue text-white shadow-sm whitespace-nowrap flex items-center gap-2";
+    }
+
+    function renderAdminTables() {
+      // Tabel Portal Berita
+      const adminBeritaEl = document.getElementById("adminBeritaTable");
+      if (adminBeritaEl) {
+        adminBeritaEl.innerHTML = appState.berita.map(b => `
+          <tr class="hover:bg-slate-50">
+            <td class="py-3.5 px-4 font-bold text-fasi-navy max-w-xs">
+              <div class="line-clamp-2">${escapeHTML(b.title)}</div>
+            </td>
+            <td class="py-3.5 px-4">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-fasi-sky text-fasi-blue whitespace-nowrap">${escapeHTML(b.category)}</span>
+            </td>
+            <td class="py-3.5 px-4 text-xs text-slate-600">
+              <div class="font-semibold">${formatIndonesianDate(b.date)}</div>
+              <div class="text-slate-400">${escapeHTML(b.author || "Panitia")}</div>
+            </td>
+            <td class="py-3.5 px-4 text-xs whitespace-nowrap space-y-1">
+              <div>
+                <span class="px-2.5 py-0.5 rounded-full font-bold ${b.status === "Terbit" ? "bg-emerald-100 text-emerald-800" : "bg-slate-200 text-slate-700"}">
+                  ${escapeHTML(b.status)}
+                </span>
+              </div>
+              <div class="flex flex-wrap gap-1 pt-0.5">
+                ${b.featured ? `<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 font-bold text-[10px]">Utama</span>` : ""}
+                ${b.syncRunningText ? `<span class="px-2 py-0.5 rounded bg-blue-100 text-fasi-blue font-bold text-[10px]">Running Text</span>` : ""}
+              </div>
+            </td>
+            <td class="py-3.5 px-4 text-right whitespace-nowrap space-x-1">
+              <button onclick="openCrudModal('berita', '${b.id}')" class="px-3 py-1.5 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold cursor-pointer">Edit</button>
+              <button onclick="askDeleteItem('berita', '${b.id}', '${escapeHTML(b.title)}')" class="px-3 py-1.5 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-700 text-xs font-bold cursor-pointer">Hapus</button>
+            </td>
+          </tr>
+        `).join("");
+      }
+
+      // Tabel Venues
+      document.getElementById("adminVenuesTable").innerHTML = appState.venues.map(v => `
+        <tr class="hover:bg-slate-50">
+          <td class="py-3.5 px-4 font-bold text-fasi-navy">${escapeHTML(v.branch)}</td>
+          <td class="py-3.5 px-4"><span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800">${escapeHTML(v.category)}</span></td>
+          <td class="py-3.5 px-4 font-medium">${escapeHTML(v.venueName)}</td>
+          <td class="py-3.5 px-4 text-xs text-slate-500">${escapeHTML(v.schedule)}</td>
+          <td class="py-3.5 px-4 text-right whitespace-nowrap space-x-1">
+            <button onclick="openCrudModal('venue', '${v.id}')" class="px-3 py-1.5 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold">Edit</button>
+            <button onclick="askDeleteItem('venue', '${v.id}', '${escapeHTML(v.branch)}')" class="px-3 py-1.5 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-700 text-xs font-bold">Hapus</button>
+          </td>
+        </tr>
+      `).join("");
+
+      // Tabel Wisata
+      document.getElementById("adminWisataTable").innerHTML = appState.wisata.map(w => `
+        <tr class="hover:bg-slate-50">
+          <td class="py-3.5 px-4 font-bold text-fasi-navy">${escapeHTML(w.name)}</td>
+          <td class="py-3.5 px-4"><span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">${escapeHTML(w.category)}</span></td>
+          <td class="py-3.5 px-4 text-xs text-slate-600">${escapeHTML(w.address)}</td>
+          <td class="py-3.5 px-4 text-xs text-slate-500">${escapeHTML(w.hours)}</td>
+          <td class="py-3.5 px-4 text-right whitespace-nowrap space-x-1">
+            <button onclick="openCrudModal('wisata', '${w.id}')" class="px-3 py-1.5 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold">Edit</button>
+            <button onclick="askDeleteItem('wisata', '${w.id}', '${escapeHTML(w.name)}')" class="px-3 py-1.5 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-700 text-xs font-bold">Hapus</button>
+          </td>
+        </tr>
+      `).join("");
+
+      // Tabel Kuliner
+      document.getElementById("adminKulinerTable").innerHTML = appState.kuliner.map(k => `
+        <tr class="hover:bg-slate-50">
+          <td class="py-3.5 px-4 font-bold text-fasi-navy">${escapeHTML(k.name)}</td>
+          <td class="py-3.5 px-4 text-xs font-semibold text-amber-800">${escapeHTML(k.specialty)}</td>
+          <td class="py-3.5 px-4 text-xs text-slate-600">${escapeHTML(k.area)}</td>
+          <td class="py-3.5 px-4 text-xs text-emerald-700 font-bold">${escapeHTML(k.priceRange)}</td>
+          <td class="py-3.5 px-4 text-right whitespace-nowrap space-x-1">
+            <button onclick="openCrudModal('kuliner', '${k.id}')" class="px-3 py-1.5 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold">Edit</button>
+            <button onclick="askDeleteItem('kuliner', '${k.id}', '${escapeHTML(k.name)}')" class="px-3 py-1.5 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-700 text-xs font-bold">Hapus</button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    // 12. CRUD MODAL HANDLERS (TAMBAH & EDIT)
+    function handleBeritaCoverFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      if (file.size > 1.8 * 1024 * 1024) {
+        showToast("Ukuran gambar sampul maksimal 1.8 MB.", "error");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const imgInput = document.getElementById("f_coverImage");
+        if (imgInput) imgInput.value = e.target.result;
+        showToast("Gambar sampul berita siap disimpan!", "success");
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function openCrudModal(type, id = "") {
+      document.getElementById("crudType").value = type;
+      document.getElementById("crudId").value = id;
+      const container = document.getElementById("crudFieldsContainer");
+      const titleEl = document.getElementById("crudModalTitle");
+
+      if (type === "berita") {
+        const item = id ? appState.berita.find(x => x.id === id) : {};
+        const bodyText = Array.isArray(item.content) ? item.content.join("\n\n") : (item.content || "");
+        const tagsText = Array.isArray(item.tags) ? item.tags.join(", ") : (item.tags || "");
+        titleEl.textContent = id ? "Edit Artikel Berita" : "Tulis Artikel Berita Baru";
+        container.innerHTML = `
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Judul Berita *</label>
+            <input type="text" id="f_title" required value="${escapeHTML(item.title || '')}" placeholder="Contoh: Pembukaan Resmi FASI XIII di Sumedang" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Kategori Berita *</label>
+              <select id="f_category" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold">
+                <option value="Pengumuman Resmi" ${item.category === 'Pengumuman Resmi' ? 'selected' : ''}>Pengumuman Resmi</option>
+                <option value="Persiapan & Venue" ${item.category === 'Persiapan & Venue' ? 'selected' : ''}>Persiapan & Venue</option>
+                <option value="Kafilah & Prestasi" ${item.category === 'Kafilah & Prestasi' ? 'selected' : ''}>Kafilah & Prestasi</option>
+                <option value="Budaya & Kuliner" ${item.category === 'Budaya & Kuliner' ? 'selected' : ''}>Budaya & Kuliner</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Tanggal Terbit *</label>
+              <input type="date" id="f_date" required value="${escapeHTML(item.date || '2026-11-23')}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Penulis / Sumber *</label>
+              <input type="text" id="f_author" required value="${escapeHTML(item.author || 'Tim Humas Panitia FASI XIII')}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Status Publikasi *</label>
+              <select id="f_status" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold">
+                <option value="Terbit" ${item.status !== 'Draft' ? 'selected' : ''}>Terbit (Tampil di Portal)</option>
+                <option value="Draft" ${item.status === 'Draft' ? 'selected' : ''}>Draft (Simpan Sementara)</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Gambar Sampul (URL atau Upload File)</label>
+            <div class="flex flex-col sm:flex-row gap-2">
+              <input type="text" id="f_coverImage" value="${escapeHTML(item.coverImage || '')}" placeholder="https://... atau upload file di samping" class="flex-1 px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+              <label class="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shrink-0">
+                <i class="fa-solid fa-upload"></i> Upload
+                <input type="file" accept="image/*" onchange="handleBeritaCoverFileUpload(event)" class="hidden" />
+              </label>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Ringkasan Singkat (Excerpt) *</label>
+            <textarea id="f_excerpt" rows="2" required placeholder="Ringkasan singkat yang muncul di kartu berita..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm">${escapeHTML(item.excerpt || '')}</textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Tag / Label (pisahkan dengan koma)</label>
+            <input type="text" id="f_tags" value="${escapeHTML(tagsText)}" placeholder="Contoh: Sumedang, Lomba Tartil, Kafilah" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Isi Lengkap Berita (Pisahkan paragraf dengan baris kosong) *</label>
+            <textarea id="f_content" rows="5" required placeholder="Tulis isi lengkap berita di sini..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm">${escapeHTML(bodyText)}</textarea>
+          </div>
+          <div class="flex flex-wrap gap-4 pt-1">
+            <label class="inline-flex items-center gap-2 text-xs font-bold text-slate-700 cursor-pointer">
+              <input type="checkbox" id="f_featured" ${item.featured ? 'checked' : ''} class="rounded text-fasi-blue focus:ring-fasi-blue" />
+              Jadikan Berita Utama (Featured)
+            </label>
+            <label class="inline-flex items-center gap-2 text-xs font-bold text-slate-700 cursor-pointer">
+              <input type="checkbox" id="f_syncRunningText" ${item.syncRunningText ? 'checked' : ''} class="rounded text-fasi-blue focus:ring-fasi-blue" />
+              Sorot di Running Text Pengumuman
+            </label>
+          </div>
+        `;
+      } else if (type === "venue") {
+        const item = id ? appState.venues.find(x => x.id === id) : {};
+        titleEl.textContent = id ? "Edit Venue Cabang Lomba" : "Tambah Venue Cabang Lomba";
+        container.innerHTML = `
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Nama Cabang Lomba *</label>
+            <input type="text" id="f_branch" required value="${escapeHTML(item.branch || '')}" placeholder="Contoh: Tartil Al-Qur'an" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Jenjang *</label>
+              <select id="f_category" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold">
+                <option value="TKA" ${item.category === 'TKA' ? 'selected' : ''}>TKA</option>
+                <option value="TPA" ${item.category === 'TPA' ? 'selected' : ''}>TPA</option>
+                <option value="TQA" ${item.category === 'TQA' ? 'selected' : ''}>TQA</option>
+                <option value="UMUM" ${item.category === 'UMUM' ? 'selected' : ''}>UMUM</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Jadwal Pelaksanaan *</label>
+              <input type="text" id="f_schedule" required value="${escapeHTML(item.schedule || 'Sabtu, 19 Des 2026 • 08.00 WIB')}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Nama Gedung / Venue *</label>
+            <input type="text" id="f_venueName" required value="${escapeHTML(item.venueName || '')}" placeholder="Contoh: Masjid Agung Sumedang" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Alamat Lengkap *</label>
+            <input type="text" id="f_address" required value="${escapeHTML(item.address || '')}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Kata Kunci Google Maps *</label>
+            <input type="text" id="f_mapsQuery" required value="${escapeHTML(item.mapsQuery || '')}" placeholder="Contoh: Masjid Agung Sumedang" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+        `;
+      } else if (type === "wisata") {
+        const item = id ? appState.wisata.find(x => x.id === id) : {};
+        titleEl.textContent = id ? "Edit Destinasi Wisata" : "Tambah Destinasi Wisata";
+        container.innerHTML = `
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Nama Tempat Wisata *</label>
+            <input type="text" id="f_name" required value="${escapeHTML(item.name || '')}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Kategori Wisata *</label>
+              <select id="f_category" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold">
+                <option value="Religi" ${item.category === 'Religi' ? 'selected' : ''}>Religi</option>
+                <option value="Sejarah" ${item.category === 'Sejarah' ? 'selected' : ''}>Sejarah</option>
+                <option value="Alam & Keluarga" ${item.category === 'Alam & Keluarga' ? 'selected' : ''}>Alam & Keluarga</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Jam Operasional *</label>
+              <input type="text" id="f_hours" required value="${escapeHTML(item.hours || '08.00 – 17.00 WIB')}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Deskripsi Singkat *</label>
+            <textarea id="f_description" rows="2" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm">${escapeHTML(item.description || '')}</textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Alamat / Lokasi *</label>
+            <input type="text" id="f_address" required value="${escapeHTML(item.address || '')}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Kata Kunci Google Maps *</label>
+            <input type="text" id="f_mapsQuery" required value="${escapeHTML(item.mapsQuery || '')}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+        `;
+      } else if (type === "kuliner") {
+        const item = id ? appState.kuliner.find(x => x.id === id) : {};
+        titleEl.textContent = id ? "Edit Tempat Makan Pusat Kota" : "Tambah Tempat Makan Pusat Kota";
+        container.innerHTML = `
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Nama Tempat Makan *</label>
+            <input type="text" id="f_name" required value="${escapeHTML(item.name || '')}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Menu Andalan *</label>
+            <input type="text" id="f_specialty" required value="${escapeHTML(item.specialty || '')}" placeholder="Contoh: Tahu Sumedang Asli & Nasi Liwet" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Area / Lokasi *</label>
+              <input type="text" id="f_area" required value="${escapeHTML(item.area || 'Pusat Kota Sumedang')}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Kisaran Harga *</label>
+              <input type="text" id="f_priceRange" required value="${escapeHTML(item.priceRange || 'Rp 20.000 – Rp 60.000')}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Jam Buka *</label>
+            <input type="text" id="f_hours" required value="${escapeHTML(item.hours || '08.00 – 21.00 WIB')}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Alamat Lengkap *</label>
+            <input type="text" id="f_address" required value="${escapeHTML(item.address || '')}" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Kata Kunci Google Maps *</label>
+            <input type="text" id="f_mapsQuery" required value="${escapeHTML(item.mapsQuery || '')}" placeholder="Contoh: Tahu Bungkeng Sumedang" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+        `;
+      }
+
+      document.getElementById("crudModal").classList.remove("hidden");
+    }
+
+    function closeCrudModal() {
+      document.getElementById("crudModal").classList.add("hidden");
+    }
+
+    function submitCrudForm(e) {
+      e.preventDefault();
+      const type = document.getElementById("crudType").value;
+      const id = document.getElementById("crudId").value;
+
+      if (type === "berita") {
+        const isFeatured = document.getElementById("f_featured").checked;
+        const isSyncRunning = document.getElementById("f_syncRunningText").checked;
+        const rawParagraphs = document.getElementById("f_content").value.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+        const tagsArr = document.getElementById("f_tags").value.split(",").map(t => t.trim()).filter(Boolean);
+
+        if (isFeatured) {
+          appState.berita.forEach(b => { b.featured = false; });
+        }
+        if (isSyncRunning) {
+          appState.berita.forEach(b => { b.syncRunningText = false; });
+        }
+
+        const payload = {
+          id: id || "b_" + Date.now(),
+          title: document.getElementById("f_title").value.trim(),
+          category: document.getElementById("f_category").value,
+          date: document.getElementById("f_date").value,
+          author: document.getElementById("f_author").value.trim(),
+          status: document.getElementById("f_status").value,
+          coverImage: document.getElementById("f_coverImage").value.trim(),
+          excerpt: document.getElementById("f_excerpt").value.trim(),
+          tags: tagsArr,
+          content: rawParagraphs.length ? rawParagraphs : [document.getElementById("f_excerpt").value.trim()],
+          featured: isFeatured,
+          syncRunningText: isSyncRunning
+        };
+
+        if (id) {
+          const idx = appState.berita.findIndex(x => x.id === id);
+          if (idx !== -1) appState.berita[idx] = payload;
+        } else {
+          appState.berita.unshift(payload);
+        }
+      } else if (type === "venue") {
+        const payload = {
+          id: id || "v_" + Date.now(),
+          branch: document.getElementById("f_branch").value.trim(),
+          category: document.getElementById("f_category").value,
+          schedule: document.getElementById("f_schedule").value.trim(),
+          venueName: document.getElementById("f_venueName").value.trim(),
+          address: document.getElementById("f_address").value.trim(),
+          mapsQuery: document.getElementById("f_mapsQuery").value.trim()
+        };
+        if (id) {
+          const idx = appState.venues.findIndex(x => x.id === id);
+          if (idx !== -1) appState.venues[idx] = payload;
+        } else {
+          appState.venues.unshift(payload);
+        }
+      } else if (type === "wisata") {
+        const existing = id ? appState.wisata.find(x => x.id === id) : null;
+        const cat = document.getElementById("f_category").value;
+        const styleMap = {
+          "Religi": { color: "from-blue-600 to-indigo-800", icon: "fa-mosque" },
+          "Sejarah": { color: "from-amber-500 to-orange-700", icon: "fa-landmark" },
+          "Alam & Keluarga": { color: "from-emerald-600 to-teal-800", icon: "fa-tree" }
+        };
+        const payload = {
+          id: id || "w_" + Date.now(),
+          name: document.getElementById("f_name").value.trim(),
+          category: cat,
+          hours: document.getElementById("f_hours").value.trim(),
+          description: document.getElementById("f_description").value.trim(),
+          address: document.getElementById("f_address").value.trim(),
+          mapsQuery: document.getElementById("f_mapsQuery").value.trim(),
+          color: existing?.color || styleMap[cat]?.color || "from-fasi-navy to-fasi-blue",
+          icon: existing?.icon || styleMap[cat]?.icon || "fa-mountain-sun"
+        };
+        if (id) {
+          const idx = appState.wisata.findIndex(x => x.id === id);
+          if (idx !== -1) appState.wisata[idx] = payload;
+        } else {
+          appState.wisata.unshift(payload);
+        }
+      } else if (type === "kuliner") {
+        const payload = {
+          id: id || "k_" + Date.now(),
+          name: document.getElementById("f_name").value.trim(),
+          specialty: document.getElementById("f_specialty").value.trim(),
+          area: document.getElementById("f_area").value.trim(),
+          priceRange: document.getElementById("f_priceRange").value.trim(),
+          hours: document.getElementById("f_hours").value.trim(),
+          address: document.getElementById("f_address").value.trim(),
+          mapsQuery: document.getElementById("f_mapsQuery").value.trim()
+        };
+        if (id) {
+          const idx = appState.kuliner.findIndex(x => x.id === id);
+          if (idx !== -1) appState.kuliner[idx] = payload;
+        } else {
+          appState.kuliner.unshift(payload);
+        }
+      }
+
+      saveAppState();
+      renderAdminTables();
+      renderLogosAndSettings();
+      closeCrudModal();
+      showToast(id ? "Data berhasil diperbarui!" : "Data baru berhasil ditambahkan!", "success");
+    }
+
+    // 13. DELETE & CONFIRMATION MODAL
+    function askDeleteItem(type, id, label) {
+      document.getElementById("confirmModalTitle").textContent = "Hapus Data?";
+      document.getElementById("confirmModalMessage").textContent = `Anda yakin ingin menghapus "${label}" dari daftar?`;
+      const actionBtn = document.getElementById("confirmModalActionBtn");
+      actionBtn.onclick = () => {
+        if (type === "berita") appState.berita = appState.berita.filter(x => x.id !== id);
+        if (type === "venue") appState.venues = appState.venues.filter(x => x.id !== id);
+        if (type === "wisata") appState.wisata = appState.wisata.filter(x => x.id !== id);
+        if (type === "kuliner") appState.kuliner = appState.kuliner.filter(x => x.id !== id);
+
+        saveAppState();
+        renderAdminTables();
+        renderLogosAndSettings();
+        closeConfirmModal();
+        showToast("Data berhasil dihapus.", "info");
+      };
+      document.getElementById("confirmModal").classList.remove("hidden");
+    }
+
+    function closeConfirmModal() {
+      document.getElementById("confirmModal").classList.add("hidden");
+    }
+
+    // 14. SETTINGS, LOGO UPLOAD & CREDENTIALS MANAGEMENT
+    function loadSettingsIntoForm() {
+      document.getElementById("setHeroTitle").value = appState.settings.heroTitle;
+      document.getElementById("setHeroSubtitle").value = appState.settings.heroSubtitle;
+      document.getElementById("setHeroDesc").value = appState.settings.heroDesc;
+      document.getElementById("setRunningText").value = appState.settings.runningText;
+      document.getElementById("setAdminUser").value = appState.admin.username;
+      document.getElementById("setAdminPass").value = "";
+      document.getElementById("setAdminPassConfirm").value = "";
+      renderLogosAndSettings();
+    }
+
+    function handleLogoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (file.size > 1.8 * 1024 * 1024) {
+        showToast("Ukuran gambar maksimal 1.8 MB agar tersimpan optimal.", "error");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        appState.settings.customLogoBase64 = e.target.result;
+        saveAppState();
+        renderLogosAndSettings();
+        showToast("Logo kegiatan berhasil diperbarui!", "success");
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function resetLogoToDefault() {
+      appState.settings.customLogoBase64 = "";
+      saveAppState();
+      renderLogosAndSettings();
+      showToast("Logo dikembalikan ke Emblem Resmi FASI XIII.", "info");
+    }
+
+    function saveGeneralSettings() {
+      appState.settings.heroTitle = document.getElementById("setHeroTitle").value.trim() || DEFAULT_STATE.settings.heroTitle;
+      appState.settings.heroSubtitle = document.getElementById("setHeroSubtitle").value.trim() || DEFAULT_STATE.settings.heroSubtitle;
+      appState.settings.heroDesc = document.getElementById("setHeroDesc").value.trim() || DEFAULT_STATE.settings.heroDesc;
+      appState.settings.runningText = document.getElementById("setRunningText").value.trim() || DEFAULT_STATE.settings.runningText;
+
+      saveAppState();
+      renderLogosAndSettings();
+      showToast("Pengaturan tampilan portal berhasil disimpan!", "success");
+    }
+
+    function saveAdminCredentials() {
+      showToast("Kelola email dan password admin melalui Supabase Authentication, bukan dari halaman HTML.", "info");
+    }
+
+    // 15. BACKUP, RESTORE & RESET DATA
+    function exportDataJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
+      const dlAnchor = document.createElement("a");
+      dlAnchor.setAttribute("href", dataStr);
+      dlAnchor.setAttribute("download", "backup-fasi-xiii-sumedang.json");
+      document.body.appendChild(dlAnchor);
+      dlAnchor.click();
+      dlAnchor.remove();
+      showToast("File backup JSON berhasil diunduh.", "success");
+    }
+
+    function importDataJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (imported && imported.venues && imported.wisata && imported.kuliner) {
+            appState = {
+              settings: { ...DEFAULT_STATE.settings, ...(imported.settings || {}) },
+              admin: { ...DEFAULT_STATE.admin, ...(imported.admin || {}) },
+              berita: Array.isArray(imported.berita) ? imported.berita : DEFAULT_STATE.berita,
+              venues: imported.venues,
+              wisata: imported.wisata,
+              kuliner: imported.kuliner
+            };
+            saveAppState();
+            renderAdminTables();
+            loadSettingsIntoForm();
+            showToast("Data backup berhasil dipulihkan!", "success");
+          } else {
+            showToast("Format file JSON tidak valid.", "error");
+          }
+        } catch (err) {
+          showToast("Gagal membaca file JSON.", "error");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function resetAllDataToDefault() {
+      document.getElementById("confirmModalTitle").textContent = "Reset Semua Data ke Awal?";
+      document.getElementById("confirmModalMessage").textContent = "Seluruh perubahan venue, wisata, kuliner, dan logo akan dikembalikan ke pengaturan awal.";
+      const actionBtn = document.getElementById("confirmModalActionBtn");
+      actionBtn.onclick = () => {
+        appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+        saveAppState();
+        renderAdminTables();
+        loadSettingsIntoForm();
+        closeConfirmModal();
+        showToast("Semua data telah dikembalikan ke pengaturan awal.", "info");
+      };
+      document.getElementById("confirmModal").classList.remove("hidden");
+    }
+
+    // 16. INITIALIZE ON PAGE LOAD
+    window.addEventListener("DOMContentLoaded", async () => {
+      if (supabaseClient) {
+        const { data } = await supabaseClient.auth.getSession();
+        currentAdminSession = data?.session || null;
+        supabaseClient.auth.onAuthStateChange((_event, session) => {
+          currentAdminSession = session;
+          updateAdminNavButton();
+          if (!session && !document.getElementById("adminDashboardView").classList.contains("hidden")) switchTab("public");
+        });
+        await loadCloudState();
+      } else {
+        console.warn("Supabase belum dikonfigurasi. Website berjalan dalam mode baca lokal; fitur admin tidak aman dan penyimpanan lintas perangkat belum aktif.");
+      }
+      renderLogosAndSettings(); renderBerita(); renderVenues(); renderWisata(); renderKuliner();
+      updateAdminNavButton(); startCountdown();
+    });
+  </script>
+</body>
+</html>
