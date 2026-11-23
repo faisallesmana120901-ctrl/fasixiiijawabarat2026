@@ -815,6 +815,9 @@
         <button type="submit" class="w-full py-3 rounded-xl bg-fasi-navy hover:bg-fasi-royal text-white font-extrabold text-sm shadow-md transition">
           Masuk ke Dashboard Admin
         </button>
+        <button type="button" onclick="sendAdminPasswordReset()" class="w-full text-xs font-bold text-fasi-blue hover:underline">
+          Lupa password? Kirim tautan reset ke email admin
+        </button>
       </form>
     </div>
   </div>
@@ -869,7 +872,7 @@
     // URL dan anon key memang boleh berada di frontend; keamanan ditentukan oleh RLS.
     const SUPABASE_URL = "https://ztsbashhmrvvpfalprqo.supabase.co";
 const SUPABASE_ANON_KEY = "ISI_PUBLISHABLE_KEY_FASI2026";
-    const SUPABASE_CONFIGURED = !SUPABASE_URL.includes("GANTI-PROJECT") && !SUPABASE_ANON_KEY.includes("GANTI_DENGAN");
+    const SUPABASE_CONFIGURED = !!SUPABASE_URL && !!SUPABASE_ANON_KEY && !SUPABASE_ANON_KEY.includes("ISI_PUBLISHABLE_KEY") && !SUPABASE_ANON_KEY.includes("GANTI_DENGAN");
     const supabaseClient = SUPABASE_CONFIGURED && window.supabase
       ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
       : null;
@@ -1903,7 +1906,7 @@ const SUPABASE_ANON_KEY = "ISI_PUBLISHABLE_KEY_FASI2026";
     }
 
     // 10. ADMIN AUTHENTICATION: Supabase Auth (server-side session)
-    function isAdminLoggedIn() { return !!currentAdminSession; }
+    function isAdminLoggedIn() { return !!currentAdminSession && currentAdminSession.user?.app_metadata?.role === "admin"; }
 
     function updateAdminNavButton() {
       const btnText = document.getElementById("adminNavBtnText");
@@ -1935,10 +1938,39 @@ const SUPABASE_ANON_KEY = "ISI_PUBLISHABLE_KEY_FASI2026";
         document.getElementById("loginErrorAlert").classList.remove("hidden");
         return;
       }
+      if (data.session.user?.app_metadata?.role !== "admin") {
+        await supabaseClient.auth.signOut();
+        currentAdminSession = null;
+        document.getElementById("loginErrorAlert").textContent = "Akun ini belum diberi hak administrator.";
+        document.getElementById("loginErrorAlert").classList.remove("hidden");
+        updateAdminNavButton();
+        return;
+      }
       currentAdminSession = data.session;
       await loadCloudState();
       closeLoginModal(); updateAdminNavButton(); switchTab("admin");
-      showToast("Berhasil masuk. Sesi diverifikasi oleh Supabase.", "success");
+      showToast("Login administrator berhasil.", "success");
+    }
+
+    async function sendAdminPasswordReset() {
+      if (!supabaseClient) {
+        showToast("Supabase belum dikonfigurasi. Periksa URL dan Publishable/Anon Key.", "error");
+        return;
+      }
+      const email = document.getElementById("loginUsernameInput").value.trim();
+      if (!email) {
+        showToast("Masukkan email admin terlebih dahulu.", "error");
+        document.getElementById("loginUsernameInput").focus();
+        return;
+      }
+      const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + "/"
+      });
+      if (error) {
+        showToast("Gagal mengirim email reset: " + error.message, "error");
+        return;
+      }
+      showToast("Jika email terdaftar, tautan reset akan dikirim. Periksa inbox dan folder spam.", "success");
     }
 
     async function logoutAdmin() {
@@ -2491,9 +2523,22 @@ const SUPABASE_ANON_KEY = "ISI_PUBLISHABLE_KEY_FASI2026";
       if (supabaseClient) {
         const { data } = await supabaseClient.auth.getSession();
         currentAdminSession = data?.session || null;
-        supabaseClient.auth.onAuthStateChange((_event, session) => {
+        supabaseClient.auth.onAuthStateChange(async (event, session) => {
           currentAdminSession = session;
           updateAdminNavButton();
+          if (event === "PASSWORD_RECOVERY" && session) {
+            const newPassword = window.prompt("Masukkan password baru (minimal 8 karakter):");
+            if (newPassword && newPassword.length >= 8) {
+              const { error } = await supabaseClient.auth.updateUser({ password: newPassword });
+              if (error) showToast("Gagal memperbarui password: " + error.message, "error");
+              else showToast("Password berhasil diperbarui. Silakan login kembali.", "success");
+              await supabaseClient.auth.signOut();
+              currentAdminSession = null;
+              updateAdminNavButton();
+            } else if (newPassword !== null) {
+              showToast("Password minimal 8 karakter.", "error");
+            }
+          }
           if (!session && !document.getElementById("adminDashboardView").classList.contains("hidden")) switchTab("public");
         });
         await loadCloudState();
