@@ -1,0 +1,275 @@
+{
+  "settings": {
+    "heroTitle": "FASI XIII TINGKAT PROVINSI JAWA BARAT",
+    "heroSubtitle": "Kabupaten Sumedang • 19 – 21 Desember 2026",
+    "heroDesc": "Portal informasi resmi Festival Anak Shaleh Indonesia ke-13 (FASI XIII) Tingkat Provinsi Jawa Barat. Temukan lokasi venue perlombaan, panduan destinasi wisata unggulan, serta kuliner legendaris di pusat kota Kabupaten Sumedang.",
+    "runningText": "Selamat Datang Kafilah FASI XIII Tingkat Provinsi Jawa Barat di Kabupaten Sumedang (19 – 21 Desember 2026) • Jaga Sportivitas, Ukhuwah Islamiyah, dan Kebersihan di Seluruh Arena Lomba!",
+    "customLogoBase64": ""
+  },
+  "berita": [
+    {
+      "id": "b1",
+      "title": "Sumedang Matangkan Kesiapan Venue & Penyambutan Kafilah FASI XIII Jawa Barat",
+      "category": "Persiapan & Venue",
+      "author": "Tim Humas Panitia Lokal FASI XIII",
+      "date": "2026-11-18",
+      "status": "Terbit",
+      "featured": true,
+      "syncRunningText": true,
+      "coverImage": "",
+      "tags": [
+        "Sumedang",
+        "Venue Lomba",
+        "Masjid Agung",
+        "Al-Kamil Jatigede"
+      ],
+      "excerpt": "Pemerintah Kabupaten Sumedang bersama LPPTKA-BKPRMI Jawa Barat memastikan kesiapan masjid, gedung pertemuan, serta jalur pelayanan kafilah menjelang pembukaan 19 Desember 2026.",
+      "content": [
+        "Kabupaten Sumedang terus mematangkan persiapan akhir menjelang perhelatan akbar Festival Anak Shaleh Indonesia (FASI) XIII Tingkat Provinsi Jawa Barat yang dijadwalkan berlangsung pada 19–21 Desember 2026.",
+        "Sejumlah lokasi strategis di sekitar pusat kota dan kawasan ikonik Sumedang telah disiapkan sebagai arena perlombaan berbagai jenjang, mulai dari TKA, TPA, hingga TQA. Masjid Agung Sumedang, Kawasan Masjid Al-Kamil Jatigede, Gedung Negara, hingga Aula Islamic Center Sumedang disiapkan dengan fasilitas pendukung yang ramah santri dan pendamping.",
+        "Panitia lokal juga mengkoordinasikan layanan informasi rute, titik penjemputan kafilah dari 27 kabupaten/kota se-Jawa Barat, serta penyediaan peta lokasi digital agar seluruh peserta dapat menjangkau venue perlombaan dengan mudah dan tepat waktu."
+      ]
+    },
+    {
+      "id": "b2",
+      "title": "Panduan Registrasi Kafilah, Verifikasi Berkas & Technical Meeting Peserta",
+      "category": "Pengumuman Resmi",
+      "author": "Sekretariat Panitia Pelaksana",
+      "date": "2026-11-20",
+      "status": "Terbit",
+      "featured": false,
+      "syncRunningText": false,
+      "coverImage": "",
+      "tags": [
+        "Registrasi",
+        "Technical Meeting",
+        "Pengumuman",
+        "Kafilah"
+      ],
+      "excerpt": "Informasi penting bagi pimpinan kafilah kabupaten/kota mengenai alur daftar ulang, kelengkapan administrasi santri, dan agenda technical meeting per cabang lomba.",
+      "content": [
+        "Seluruh kontingen atau kafilah dari 27 kabupaten/kota di Provinsi Jawa Barat diimbau memperhatikan jadwal registrasi ulang dan verifikasi administrasi peserta sebelum hari pelaksanaan lomba dimulai.",
+        "Setiap ketua kafilah diharapkan membawa rekapitulasi resmi peserta per cabang dan jenjang lomba, surat mandat resmi daerah, serta dokumen identitas pendukung sesuai ketentuan pedoman teknis FASI XIII Jawa Barat.",
+        "Sesi technical meeting akan membahas tata tertib arena lomba, sistem penilaian, alur pemanggilan peserta, serta ketentuan waktu tampil untuk setiap cabang agar jalannya kompetisi berlangsung tertib, objektif, dan penuh ukhuwah."
+      ]
+    },
+    {
+      "id": "b3",
+      "title": "Menjelajah Pesona Religi & Kuliner Pusat Kota Sumedang Saat Mendampingi Kafilah",
+      "category": "Budaya & Kuliner",
+      "author": "Redaksi Wisata & Kuliner Sumedang",
+      "date": "2026-11-22",
+      "status": "Terbit",
+      "featured": false,
+      "syncRunningText": false,
+      "coverImage": "",
+      "tags": [
+        "Kuliner Sumedang",
+        "Tahu Sumedang",
+        "Alun-Alun",
+        "Wisata Religi"
+      ],
+      "excerpt": "Selain mengikuti rangkaian lomba, keluarga dan pendamping kafilah dapat menikmati suasana sejuk pusat kota Sumedang, wisata sejarah, hingga kuliner legendaris khas Tatar Sunda.",
+      "content": [
+        "Berkunjung ke Kabupaten Sumedang selama penyelenggaraan FASI XIII memberikan pengalaman lengkap bagi keluarga dan pendamping kafilah. Di kawasan pusat kota, Alun-Alun Sumedang, Masjid Agung, serta Museum Prabu Geusan Ulun berada dalam jangkauan yang saling berdekatan.",
+        "Bagi pecinta kuliner, pusat kota Sumedang menawarkan beragam sajian khas mulai dari Tahu Sumedang legendaris yang hangat dan gurih, Soto Bongko, hingga aneka rumah makan Sunda seperti nasi liwet, gurame bakar, dan sate yang cocok untuk rombongan.",
+        "Kunjungi tab Rekomendasi Wisata Sumedang dan Kuliner Pusat Kota pada portal ini untuk melihat detail jam operasional, kisaran harga, serta navigasi peta langsung menuju lokasi."
+      ]
+    }
+  ],
+  "venues": [
+    {
+      "id": "v1",
+      "branch": "Tartil Al-Qur'an & Tilawah",
+      "category": "TKA",
+      "venueName": "Masjid Agung Sumedang",
+      "schedule": "Sabtu, 19 Des 2026 • 08.00 - 16.00 WIB",
+      "address": "Jl. Prabu Geusan Ulun No.1, Regol Wetan, Kec. Sumedang Selatan, Kab. Sumedang",
+      "mapsQuery": "Masjid Agung Sumedang"
+    },
+    {
+      "id": "v2",
+      "branch": "Adzan & Iqamah",
+      "category": "TPA",
+      "venueName": "Masjid Al-Kamil Jatigede",
+      "schedule": "Sabtu, 19 Des 2026 • 09.00 - 15.30 WIB",
+      "address": "Kawasan Wisata Jatigede, Jemah, Kec. Jatigede, Kab. Sumedang",
+      "mapsQuery": "Masjid Al Kamil Jatigede Sumedang"
+    },
+    {
+      "id": "v3",
+      "branch": "Peragaan Shalat Berjamaah",
+      "category": "TKA",
+      "venueName": "Gedung Negara / Pendopo Sumedang",
+      "schedule": "Minggu, 20 Des 2026 • 08.00 - 15.00 WIB",
+      "address": "Jl. Prabu Geusan Ulun No.36, Regol Wetan, Kec. Sumedang Selatan, Kab. Sumedang",
+      "mapsQuery": "Gedung Negara Sumedang"
+    },
+    {
+      "id": "v4",
+      "branch": "Cerdas Cermat Al-Qur'an (CCQ)",
+      "category": "TPA",
+      "venueName": "Aula Islamic Center Sumedang",
+      "schedule": "Sabtu–Minggu, 19–20 Des 2026 • 08.30 WIB",
+      "address": "Jl. Kutamaya No.25, Kotakulon, Kec. Sumedang Selatan, Kab. Sumedang",
+      "mapsQuery": "Islamic Center Sumedang"
+    },
+    {
+      "id": "v5",
+      "branch": "Nasyid Islami & Kisah Islami",
+      "category": "TPA",
+      "venueName": "GOR Tajimalela Sumedang",
+      "schedule": "Minggu, 20 Des 2026 • 08.00 - 17.00 WIB",
+      "address": "Jl. Pacuan Kuda, Kotakaler, Kec. Sumedang Utara, Kab. Sumedang",
+      "mapsQuery": "GOR Tajimalela Sumedang"
+    },
+    {
+      "id": "v6",
+      "branch": "Tahfidz Juz 'Amma & Syarhil Qur'an",
+      "category": "TQA",
+      "venueName": "Aula Kantor Kemenag Kab. Sumedang",
+      "schedule": "Sabtu, 19 Des 2026 • 08.00 - 16.00 WIB",
+      "address": "Jl. Mayor Abdurahman No.209, Kotakaler, Kec. Sumedang Utara, Kab. Sumedang",
+      "mapsQuery": "Kantor Kementerian Agama Kabupaten Sumedang"
+    },
+    {
+      "id": "v7",
+      "branch": "Mewarnai Gambar & Kaligrafi",
+      "category": "UMUM",
+      "venueName": "Gedung Sasana Adi Guna (SAG) Sumedang",
+      "schedule": "Minggu, 20 Des 2026 • 08.30 - 13.00 WIB",
+      "address": "Jl. Pangeran Kornel, Regol Wetan, Kec. Sumedang Selatan, Kab. Sumedang",
+      "mapsQuery": "Alun Alun Sumedang"
+    }
+  ],
+  "wisata": [
+    {
+      "id": "w1",
+      "name": "Masjid Al-Kamil & Menara Kujang Sapasang",
+      "category": "Religi",
+      "hours": "06.00 – 21.00 WIB",
+      "address": "Kawasan Pesisir Bendungan Jatigede, Kec. Jatigede, Kab. Sumedang",
+      "description": "Ikon wisata religi dan arsitektur kebanggaan Sumedang dengan kubah kelopak bunga teratai dan panorama indah Bendungan Jatigede.",
+      "mapsQuery": "Masjid Al Kamil Jatigede Sumedang",
+      "color": "from-blue-600 to-indigo-800",
+      "icon": "fa-mosque"
+    },
+    {
+      "id": "w2",
+      "name": "Alun-Alun Sumedang & Monumen Lingga",
+      "category": "Sejarah",
+      "hours": "24 Jam (Terbuka Umum)",
+      "address": "Jl. Prabu Geusan Ulun, Regol Wetan, Pusat Kota Sumedang",
+      "description": "Jantung pusat kota Sumedang yang asri dengan Monumen Lingga bersejarah, air mancur, taman bermain anak, dan bersebelahan dengan Masjid Agung.",
+      "mapsQuery": "Alun Alun Sumedang",
+      "color": "from-amber-500 to-orange-700",
+      "icon": "fa-landmark"
+    },
+    {
+      "id": "w3",
+      "name": "Museum Prabu Geusan Ulun",
+      "category": "Sejarah",
+      "hours": "08.00 – 16.00 WIB",
+      "address": "Jl. Prabu Geusan Ulun No.40, Regol Wetan, Pusat Kota Sumedang",
+      "description": "Menyimpan koleksi pusaka Kerajaan Sumedang Larang termasuk Mahkota Binokasih, kereta kencana, dan gamelan kuno.",
+      "mapsQuery": "Museum Prabu Geusan Ulun Sumedang",
+      "color": "from-slate-700 to-slate-900",
+      "icon": "fa-crown"
+    },
+    {
+      "id": "w4",
+      "name": "Tahura Gunung Kunci",
+      "category": "Alam & Keluarga",
+      "hours": "08.00 – 17.00 WIB",
+      "address": "Jl. Pangeran Kornel, Kotakulon, Kec. Sumedang Selatan (Dekat Pusat Kota)",
+      "description": "Taman Hutan Raya bersejarah dengan pepohonan pinus rindang dan benteng peninggalan Belanda yang sejuk hanya beberapa menit dari Alun-Alun.",
+      "mapsQuery": "Tahura Gunung Kunci Sumedang",
+      "color": "from-emerald-600 to-teal-800",
+      "icon": "fa-tree"
+    },
+    {
+      "id": "w5",
+      "name": "Kampung Karuhun Eco Green Park",
+      "category": "Alam & Keluarga",
+      "hours": "08.00 – 17.00 WIB",
+      "address": "Jl. Pagar Betis, Citengah, Kec. Sumedang Selatan, Kab. Sumedang",
+      "description": "Wisata alam tepi sungai Cihonje dengan wahana edukasi anak, kolam renang alami, dan suasana pedesaan Sunda yang asri.",
+      "mapsQuery": "Kampung Karuhun Sumedang",
+      "color": "from-green-600 to-emerald-800",
+      "icon": "fa-water"
+    },
+    {
+      "id": "w6",
+      "name": "Jatinangor National Park (Jans Park)",
+      "category": "Alam & Keluarga",
+      "hours": "08.00 – 17.00 WIB",
+      "address": "Hegarmanah, Kec. Jatinangor, Kab. Sumedang",
+      "description": "Taman bunga tematik bergaya kastil negeri dongeng yang sangat populer untuk rekreasi keluarga dan kafilah dengan latar Gunung Manglayang.",
+      "mapsQuery": "Jatinangor National Park Sumedang",
+      "color": "from-sky-500 to-blue-700",
+      "icon": "fa-fort-awesome"
+    }
+  ],
+  "kuliner": [
+    {
+      "id": "k1",
+      "name": "Tahu Bungkeng Pusat (Legendaris Sejak 1917)",
+      "specialty": "Tahu Sumedang Asli & Lontong",
+      "area": "Pusat Kota (Jl. 11 April)",
+      "priceRange": "Rp 15.000 – Rp 50.000",
+      "hours": "07.00 – 21.00 WIB",
+      "address": "Jl. 11 April No.53, Kotakaler, Kec. Sumedang Utara (500m dari Alun-Alun)",
+      "mapsQuery": "Tahu Bungkeng Sumedang"
+    },
+    {
+      "id": "k2",
+      "name": "Tahu Palasari Sumedang",
+      "specialty": "Tahu Renyah, Oleh-Oleh & Makanan Sunda",
+      "area": "Pusat Kota (Jl. Mayor Abdurahman)",
+      "priceRange": "Rp 15.000 – Rp 60.000",
+      "hours": "06.30 – 21.30 WIB",
+      "address": "Jl. Mayor Abdurahman No.153, Kotakaler, Kec. Sumedang Utara",
+      "mapsQuery": "Tahu Palasari Sumedang"
+    },
+    {
+      "id": "k3",
+      "name": "Rumah Makan Saung Teko Sumedang",
+      "specialty": "Nasi Liwet, Gurame Bakar, Karedok",
+      "area": "Pusat Kota (Jl. Mayor Abdurahman)",
+      "priceRange": "Rp 25.000 – Rp 75.000",
+      "hours": "09.00 – 21.00 WIB",
+      "address": "Jl. Mayor Abdurahman No.145, Kotakaler, Kec. Sumedang Utara",
+      "mapsQuery": "RM Saung Teko Sumedang"
+    },
+    {
+      "id": "k4",
+      "name": "RM Joglo Sumedang",
+      "specialty": "Paket Prasmanan Sunda & Ayam Bakakak",
+      "area": "Pusat Kota (Jl. Serma Muchtar)",
+      "priceRange": "Rp 25.000 – Rp 70.000",
+      "hours": "09.00 – 21.00 WIB",
+      "address": "Jl. Serma Muchtar No.97, Situ, Kec. Sumedang Utara, Kab. Sumedang",
+      "mapsQuery": "RM Joglo Sumedang"
+    },
+    {
+      "id": "k5",
+      "name": "Sate Iting Pusat Kota",
+      "specialty": "Sate Kambing & Sate Sapi Empuk + Gule",
+      "area": "Pusat Kota (Jl. Mayor Abdurahman)",
+      "priceRange": "Rp 30.000 – Rp 65.000",
+      "hours": "10.00 – 21.00 WIB",
+      "address": "Jl. Mayor Abdurahman No.110, Kotakaler, Pusat Kota Sumedang",
+      "mapsQuery": "Sate Iting Sumedang"
+    },
+    {
+      "id": "k6",
+      "name": "Soto Bongko & Kuliner Alun-Alun Sumedang",
+      "specialty": "Soto Bongko Khas Sumedang (Lontong Daun Patat)",
+      "area": "Pusat Kota (Sekitar Alun-Alun)",
+      "priceRange": "Rp 15.000 – Rp 30.000",
+      "hours": "07.00 – 17.00 WIB",
+      "address": "Jl. Prabu Geusan Ulun / Sekitar Alun-Alun Sumedang, Regol Wetan",
+      "mapsQuery": "Alun Alun Sumedang"
+    }
+  ]
+}

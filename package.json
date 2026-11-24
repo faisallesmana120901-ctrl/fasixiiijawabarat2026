@@ -1,0 +1,13 @@
+{
+  "name": "portal-fasi-xiii-sumedang",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Portal FASI XIII Sumedang - Vercel + Neon PostgreSQL",
+  "engines": { "node": ">=20" },
+  "scripts": { "start": "node api/index.js" },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  }
+}

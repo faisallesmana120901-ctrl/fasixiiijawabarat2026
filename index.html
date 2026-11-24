@@ -417,7 +417,7 @@
             <i class="fa-solid fa-circle-check"></i> Mode Administrator Aktif
           </div>
           <h1 class="text-2xl sm:text-3xl font-extrabold">Panel Kontrol Konten FASI XIII</h1>
-          <p class="text-blue-200 text-sm mt-1">Kelola konten FASI XIII. Perubahan tersimpan ke database cloud saat Supabase sudah dikonfigurasi.</p>
+          <p class="text-blue-200 text-sm mt-1">Kelola venue cabang lomba, wisata Sumedang, kuliner pusat kota, logo kegiatan, dan keamanan akun admin.</p>
         </div>
         <div class="flex flex-wrap items-center gap-2.5">
           <button onclick="switchTab('public')" class="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs sm:text-sm font-bold transition flex items-center gap-2">
@@ -604,11 +604,11 @@
 
           <!-- Form Keamanan Akun Admin & Backup Data -->
           <div class="space-y-6">
-            <div class="hidden bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-4">
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-4">
               <h3 class="text-lg font-extrabold text-fasi-navy flex items-center gap-2">
                 <i class="fa-solid fa-user-lock text-fasi-gold"></i> Ubah Akun Login Khusus Admin
               </h3>
-              <p class="text-xs text-slate-500">Ubah Username dan Password agar hanya Anda yang memiliki akses masuk ke panel admin ini.</p>
+              <p class="text-xs text-slate-500">Kredensial diverifikasi oleh server. Password tidak pernah ditampilkan kembali.</p>
 
               <div>
                 <label class="block text-xs font-bold text-slate-700 mb-1">Username Admin Baru</label>
@@ -616,7 +616,7 @@
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-700 mb-1">Password Admin Baru</label>
-                <input type="password" id="setAdminPass" placeholder="Masukkan password baru..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+                <input type="password" id="setAdminPass" placeholder="Password baru (minimal 10 karakter)..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
               </div>
               <div>
                 <label class="block text-xs font-bold text-slate-700 mb-1">Konfirmasi Password Baru</label>
@@ -793,10 +793,10 @@
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Email Admin</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Username</label>
           <div class="relative">
             <i class="fa-solid fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-            <input type="text" id="loginUsernameInput" required placeholder="Email admin yang terdaftar di Supabase" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-fasi-blue" />
+            <input type="text" id="loginUsernameInput" required placeholder="Masukkan username admin" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-fasi-blue" />
           </div>
         </div>
 
@@ -807,11 +807,6 @@
             <input type="password" id="loginPasswordInput" required placeholder="Masukkan password" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-fasi-blue" />
           </div>
         </div>
-
-        <div class="p-3 rounded-xl bg-blue-50 border border-blue-200 text-[11px] text-blue-900">
-          Akun admin dibuat dan dikelola melalui Supabase Authentication. Tidak ada password bawaan di dalam file HTML.
-        </div>
-
         <button type="submit" class="w-full py-3 rounded-xl bg-fasi-navy hover:bg-fasi-royal text-white font-extrabold text-sm shadow-md transition">
           Masuk ke Dashboard Admin
         </button>
@@ -863,17 +858,7 @@
   </div>
 
   <!-- ==================== JAVASCRIPT APPLICATION LOGIC ==================== -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    // KONFIGURASI SUPABASE: isi setelah membuat project Supabase.
-    // URL dan anon key memang boleh berada di frontend; keamanan ditentukan oleh RLS.
-    const SUPABASE_URL = "https://ztsbashhmrvvpfalprqo.supabase.co";
-const SUPABASE_ANON_KEY = "ISI_PUBLISHABLE_KEY_FASI2026";
-    const SUPABASE_CONFIGURED = !SUPABASE_URL.includes("GANTI-PROJECT") && !SUPABASE_ANON_KEY.includes("GANTI_DENGAN");
-    const supabaseClient = SUPABASE_CONFIGURED && window.supabase
-      ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-      : null;
-    let currentAdminSession = null;
 
     // 1. DEFAULT OFFICIAL SVG EMBLEM (Menyerupai Logo FASI XIII Jawa Barat di Sumedang: Gedung Sate, Masjid Al-Kamil Jatigede, Santri Putra & Putri, Teks Resmi)
     const DEFAULT_OFFICIAL_LOGO_SVG = `
@@ -978,9 +963,6 @@ const SUPABASE_ANON_KEY = "ISI_PUBLISHABLE_KEY_FASI2026";
         runningText: "Selamat Datang Kafilah FASI XIII Tingkat Provinsi Jawa Barat di Kabupaten Sumedang (19 – 21 Desember 2026) • Jaga Sportivitas, Ukhuwah Islamiyah, dan Kebersihan di Seluruh Arena Lomba!",
         customLogoBase64: "" // Kosong = gunakan DEFAULT_OFFICIAL_LOGO_SVG
       },
-      // Kredensial admin TIDAK disimpan di dalam HTML.
-      // Autentikasi dikelola oleh Supabase Auth.
-      admin: {},
       berita: [
         {
           id: "b1",
@@ -1234,67 +1216,54 @@ const SUPABASE_ANON_KEY = "ISI_PUBLISHABLE_KEY_FASI2026";
       ]
     };
 
-    // 3. STATE MANAGEMENT: cache lokal + database cloud Supabase
-    const STORAGE_KEY = "FASI_XIII_SUMEDANG_DATA_V2";
-    const AUTH_SESSION_KEY = "FASI_XIII_ADMIN_LOGGED_IN"; // hanya penanda UI; bukan sumber otorisasi
-    let appState = loadAppState();
+    // 3. STATE MANAGEMENT - SERVER API
+    let appState = { ...JSON.parse(JSON.stringify(DEFAULT_STATE)), admin: { username: "" } };
+    let adminAuthenticated = false;
     let currentWisataFilter = "ALL";
     let currentBeritaFilter = "ALL";
     let activeReaderBeritaId = null;
 
-    function loadAppState() {
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          return {
-            settings: { ...DEFAULT_STATE.settings, ...(parsed.settings || {}) },
-            admin: {},
-            berita: Array.isArray(parsed.berita) ? parsed.berita : DEFAULT_STATE.berita,
-            venues: Array.isArray(parsed.venues) ? parsed.venues : DEFAULT_STATE.venues,
-            wisata: Array.isArray(parsed.wisata) ? parsed.wisata : DEFAULT_STATE.wisata,
-            kuliner: Array.isArray(parsed.kuliner) ? parsed.kuliner : DEFAULT_STATE.kuliner
-          };
-        }
-      } catch (e) { console.error("Gagal membaca cache lokal:", e); }
-      return JSON.parse(JSON.stringify(DEFAULT_STATE));
+    async function apiRequest(url, options = {}) {
+      const response = await fetch(url, {
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+        ...options
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || "Permintaan ke server gagal.");
+      return data;
     }
 
-    async function loadCloudState() {
-      if (!supabaseClient) return;
-      const { data, error } = await supabaseClient.from("fasi_site_data").select("data").eq("id", "main").maybeSingle();
-      if (error) { console.error(error); showToast("Data cloud belum dapat dimuat. Periksa konfigurasi Supabase.", "error"); return; }
-      if (data && data.data) {
-        const parsed = data.data;
+    async function loadAppState() {
+      try {
+        const data = await apiRequest("/api/public/state");
         appState = {
-          settings: { ...DEFAULT_STATE.settings, ...(parsed.settings || {}) }, admin: {},
-          berita: Array.isArray(parsed.berita) ? parsed.berita : DEFAULT_STATE.berita,
-          venues: Array.isArray(parsed.venues) ? parsed.venues : DEFAULT_STATE.venues,
-          wisata: Array.isArray(parsed.wisata) ? parsed.wisata : DEFAULT_STATE.wisata,
-          kuliner: Array.isArray(parsed.kuliner) ? parsed.kuliner : DEFAULT_STATE.kuliner
+          settings: { ...DEFAULT_STATE.settings, ...(data.settings || {}) },
+          berita: Array.isArray(data.berita) ? data.berita : DEFAULT_STATE.berita,
+          venues: Array.isArray(data.venues) ? data.venues : DEFAULT_STATE.venues,
+          wisata: Array.isArray(data.wisata) ? data.wisata : DEFAULT_STATE.wisata,
+          kuliner: Array.isArray(data.kuliner) ? data.kuliner : DEFAULT_STATE.kuliner
         };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-      } else {
-        // Inisialisasi pertama: simpan data bawaan hanya bila admin sudah login.
-        console.info("Data cloud belum dibuat. Admin dapat melakukan penyimpanan pertama.");
+      } catch (error) {
+        console.error(error);
+        showToast("Tidak dapat terhubung ke server. Muat ulang halaman.", "error");
       }
     }
 
     async function saveAppState() {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appState)); }
-      catch (e) { showToast("Cache browser penuh. Kurangi ukuran gambar logo.", "error"); }
-      if (!supabaseClient) {
-        showToast("Mode lokal: hubungkan Supabase agar data tersinkron antarperangkat.", "error");
-        return;
+      try {
+        const payload = {
+          settings: appState.settings,
+          berita: appState.berita,
+          venues: appState.venues,
+          wisata: appState.wisata,
+          kuliner: appState.kuliner
+        };
+        await apiRequest("/api/admin/state", { method: "PUT", body: JSON.stringify(payload) });
+      } catch (error) {
+        showToast(error.message || "Gagal menyimpan data ke server.", "error");
+        throw error;
       }
-      const { data: sessionData } = await supabaseClient.auth.getSession();
-      if (!sessionData?.session) {
-        showToast("Sesi admin tidak aktif. Silakan login kembali.", "error");
-        return;
-      }
-      const payload = { id: "main", data: { settings: appState.settings, berita: appState.berita, venues: appState.venues, wisata: appState.wisata, kuliner: appState.kuliner }, updated_at: new Date().toISOString() };
-      const { error } = await supabaseClient.from("fasi_site_data").upsert(payload, { onConflict: "id" });
-      if (error) { console.error(error); showToast("Gagal menyimpan ke database cloud: " + error.message, "error"); }
     }
 
     // 4. TOAST NOTIFICATION HELPER
@@ -1902,16 +1871,26 @@ const SUPABASE_ANON_KEY = "ISI_PUBLISHABLE_KEY_FASI2026";
       }
     }
 
-    // 10. ADMIN AUTHENTICATION: Supabase Auth (server-side session)
-    function isAdminLoggedIn() { return !!currentAdminSession; }
+    // 10. ADMIN AUTHENTICATION SYSTEM
+    function isAdminLoggedIn() {
+      return adminAuthenticated;
+    }
 
     function updateAdminNavButton() {
       const btnText = document.getElementById("adminNavBtnText");
-      if (btnText) btnText.textContent = isAdminLoggedIn() ? "Dashboard Admin" : "Admin Login";
+      if (isAdminLoggedIn()) {
+        btnText.textContent = "Dashboard Admin";
+      } else {
+        btnText.textContent = "Admin Login";
+      }
     }
 
     function handleAdminNavClick() {
-      if (isAdminLoggedIn()) switchTab("admin"); else openLoginModal();
+      if (isAdminLoggedIn()) {
+        switchTab("admin");
+      } else {
+        openLoginModal();
+      }
     }
 
     function openLoginModal() {
@@ -1920,31 +1899,37 @@ const SUPABASE_ANON_KEY = "ISI_PUBLISHABLE_KEY_FASI2026";
       document.getElementById("loginPasswordInput").value = "";
       document.getElementById("adminLoginModal").classList.remove("hidden");
     }
-    function closeLoginModal() { document.getElementById("adminLoginModal").classList.add("hidden"); }
+
+    function closeLoginModal() {
+      document.getElementById("adminLoginModal").classList.add("hidden");
+    }
 
     async function submitAdminLogin(e) {
       e.preventDefault();
-      if (!supabaseClient) {
-        showToast("Supabase belum dikonfigurasi. Admin belum dapat login dengan aman.", "error");
-        return;
-      }
-      const email = document.getElementById("loginUsernameInput").value.trim();
-      const password = document.getElementById("loginPasswordInput").value;
-      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-      if (error || !data.session) {
+      const user = document.getElementById("loginUsernameInput").value.trim();
+      const pass = document.getElementById("loginPasswordInput").value;
+      try {
+        await apiRequest("/api/auth/login", { method: "POST", body: JSON.stringify({ username: user, password: pass }) });
+        adminAuthenticated = true;
+        closeLoginModal();
+        updateAdminNavButton();
+        const fresh = await apiRequest("/api/admin/state");
+        const profile = await apiRequest("/api/admin/profile");
+        appState = { ...appState, ...fresh, admin: profile };
+        switchTab("admin");
+        renderAdminTables();
+        loadSettingsIntoForm();
+        showToast("Berhasil masuk sebagai Administrator!", "success");
+      } catch (error) {
         document.getElementById("loginErrorAlert").classList.remove("hidden");
-        return;
       }
-      currentAdminSession = data.session;
-      await loadCloudState();
-      closeLoginModal(); updateAdminNavButton(); switchTab("admin");
-      showToast("Berhasil masuk. Sesi diverifikasi oleh Supabase.", "success");
     }
 
     async function logoutAdmin() {
-      if (supabaseClient) await supabaseClient.auth.signOut();
-      currentAdminSession = null;
-      updateAdminNavButton(); switchTab("public");
+      try { await apiRequest("/api/auth/logout", { method: "POST", body: "{}" }); } catch (_) {}
+      adminAuthenticated = false;
+      updateAdminNavButton();
+      switchTab("public");
       showToast("Anda telah keluar dari Panel Admin.", "info");
     }
 
@@ -2425,13 +2410,25 @@ const SUPABASE_ANON_KEY = "ISI_PUBLISHABLE_KEY_FASI2026";
       showToast("Pengaturan tampilan portal berhasil disimpan!", "success");
     }
 
-    function saveAdminCredentials() {
-      showToast("Kelola email dan password admin melalui Supabase Authentication, bukan dari halaman HTML.", "info");
+    async function saveAdminCredentials() {
+      const newUser = document.getElementById("setAdminUser").value.trim();
+      const newPass = document.getElementById("setAdminPass").value;
+      const confirmPass = document.getElementById("setAdminPassConfirm").value;
+      if (!newUser) return showToast("Username tidak boleh kosong!", "error");
+      if (newPass.length < 12) return showToast("Password minimal 12 karakter.", "error");
+      if (newPass !== confirmPass) return showToast("Konfirmasi password tidak cocok!", "error");
+      try {
+        await apiRequest("/api/admin/credentials", { method: "PUT", body: JSON.stringify({ username: newUser, password: newPass }) });
+        document.getElementById("setAdminPass").value = "";
+        document.getElementById("setAdminPassConfirm").value = "";
+        document.getElementById("setAdminUser").value = newUser;
+        showToast("Kredensial admin berhasil diperbarui.", "success");
+      } catch (error) { showToast(error.message, "error"); }
     }
 
     // 15. BACKUP, RESTORE & RESET DATA
     function exportDataJSON() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ settings: appState.settings, berita: appState.berita, venues: appState.venues, wisata: appState.wisata, kuliner: appState.kuliner }, null, 2));
       const dlAnchor = document.createElement("a");
       dlAnchor.setAttribute("href", dataStr);
       dlAnchor.setAttribute("download", "backup-fasi-xiii-sumedang.json");
@@ -2451,7 +2448,6 @@ const SUPABASE_ANON_KEY = "ISI_PUBLISHABLE_KEY_FASI2026";
           if (imported && imported.venues && imported.wisata && imported.kuliner) {
             appState = {
               settings: { ...DEFAULT_STATE.settings, ...(imported.settings || {}) },
-              admin: { ...DEFAULT_STATE.admin, ...(imported.admin || {}) },
               berita: Array.isArray(imported.berita) ? imported.berita : DEFAULT_STATE.berita,
               venues: imported.venues,
               wisata: imported.wisata,
@@ -2488,21 +2484,25 @@ const SUPABASE_ANON_KEY = "ISI_PUBLISHABLE_KEY_FASI2026";
 
     // 16. INITIALIZE ON PAGE LOAD
     window.addEventListener("DOMContentLoaded", async () => {
-      if (supabaseClient) {
-        const { data } = await supabaseClient.auth.getSession();
-        currentAdminSession = data?.session || null;
-        supabaseClient.auth.onAuthStateChange((_event, session) => {
-          currentAdminSession = session;
-          updateAdminNavButton();
-          if (!session && !document.getElementById("adminDashboardView").classList.contains("hidden")) switchTab("public");
-        });
-        await loadCloudState();
-      } else {
-        console.warn("Supabase belum dikonfigurasi. Website berjalan dalam mode baca lokal; fitur admin tidak aman dan penyimpanan lintas perangkat belum aktif.");
-      }
-      renderLogosAndSettings(); renderBerita(); renderVenues(); renderWisata(); renderKuliner();
-      updateAdminNavButton(); startCountdown();
+      await loadAppState();
+      try {
+        const auth = await apiRequest("/api/auth/me");
+        adminAuthenticated = !!auth.authenticated;
+        if (adminAuthenticated) {
+          const fresh = await apiRequest("/api/admin/state");
+          const profile = await apiRequest("/api/admin/profile");
+          appState = { ...appState, ...fresh, admin: profile };
+        }
+      } catch (_) { adminAuthenticated = false; }
+      renderLogosAndSettings();
+      renderBerita();
+      renderVenues();
+      renderWisata();
+      renderKuliner();
+      updateAdminNavButton();
+      startCountdown();
     });
+
   </script>
 </body>
 </html>
